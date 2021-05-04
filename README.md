@@ -1,6 +1,6 @@
 # u10-business-idea-etsy-clone
 
-#Kodstandard
+# Kodstandard
 
   Variabelnamn: lowerCamelCase
   Indentering: Tabs
