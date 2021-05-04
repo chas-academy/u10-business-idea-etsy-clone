@@ -1,7 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import axios from "axios";
+import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [name, setName] = useState("");
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_URL + "/test").then((response) => {
+      console.log(response.data);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +18,28 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {process.env.REACT_APP_URL}
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            axios
+              .post(process.env.REACT_APP_URL + "/name", {
+                data: name,
+              })
+              .then((response) => {
+                alert(response.data);
+              });
+          }}
         >
-          Learn React
-        </a>
+          Send
+        </button>
       </header>
     </div>
   );
