@@ -3,4 +3,5 @@
 # Kodstandard
 
   Variabelnamn: lowerCamelCase
+
   Indentering: Tabs
