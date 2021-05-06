@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,10 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function (Request $request) {
-    return 'hej';
+    $users = User::all();
+    return $users;
 });
 
 Route::post('/name', function (Request $request) { 
-    $name = $request->input('data');
-    return 'Hej ' . $name;
+
+    return 'Hej ' ;
 });
+
+
+Route::post('/register', [UserController::class, 'create']);
+Route::post('/login', [UserController::class, 'login']);

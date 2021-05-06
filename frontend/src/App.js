@@ -1,46 +1,144 @@
-import logo from "./logo.svg";
+import loading_svg from "./assets/images/loader.svg";
 import axios from "axios";
 import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
   useEffect(() => {
     axios.get(process.env.REACT_APP_URL + "/test").then((response) => {
       console.log(response.data);
     });
   }, []);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+  const Register = (callback) => {
+    const data = {
+      name: username,
+      password: password,
+      email: email,
+    };
+    axios
+      .post(process.env.REACT_APP_URL + "/register", data)
+      .then((response) => {
+        if (response.data) {
+          alert("User created");
+        } else {
+          alert("Registration failed, email taken.");
+        }
+        callback();
+      });
+  };
 
-        {process.env.REACT_APP_URL}
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <button
-          onClick={() => {
-            axios
-              .post(process.env.REACT_APP_URL + "/name", {
-                data: name,
-              })
-              .then((response) => {
-                alert(response.data);
+  const Login = (callback) => {
+    const data = {
+      email: email,
+      password: password,
+    };
+    axios.post(process.env.REACT_APP_URL + "/login", data).then((response) => {
+      if (response.data) {
+        setToken(response.data);
+        localStorage.token = response.data;
+        alert("Login successfull");
+      } else {
+        alert("Login failed, Invalid username or password.");
+      }
+      callback();
+    });
+  };
+
+  return token ? (
+    <div>
+      <h1>Homepage</h1>
+      <button
+        onClick={() => {
+          localStorage.token = false;
+          setToken(false);
+        }}
+      >
+        Logout
+      </button>
+    </div>
+  ) : (
+    <div className="loginForm">
+      <h1>{isLogin ? "Login" : "Register"}</h1>
+      <p>E-post</p>
+      <input
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+      />
+      {isLogin ? (
+        ""
+      ) : (
+        <>
+          <p>Användarnamn</p>
+          <input
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+        </>
+      )}
+      <p>password</p>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+      />
+      <button
+        onClick={(e) => {
+          if (email !== "" && password !== "") {
+            if (!isLogin && username !== "") {
+              e.target.classList.add("loading");
+              e.target.disabled = true;
+              setLoading(true);
+              Register(() => {
+                setLoading(false);
+                e.target.classList.remove("loading");
+                e.target.disabled = false;
               });
-          }}
-        >
-          Send
-        </button>
-      </header>
+            } else {
+              e.target.classList.add("loading");
+              e.target.disabled = true;
+              setLoading(true);
+              Login(() => {
+                setLoading(false);
+                e.target.classList.remove("loading");
+                e.target.disabled = false;
+              });
+            }
+          } else {
+            alert("Some of the fields are missing.");
+          }
+        }}
+      >
+        {loading ? (
+          <img src={loading_svg} />
+        ) : isLogin ? (
+          "Logga in"
+        ) : (
+          "Skapa konto"
+        )}
+      </button>
+      <p
+        onClick={() => {
+          setIsLogin(!isLogin);
+        }}
+        style={{ margin: "0.5em", textAlign: "center" }}
+      >
+        {isLogin ? "Registrera" : "Logga in"}
+      </p>
     </div>
   );
 }
