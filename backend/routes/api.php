@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Http\Middleware\EnsureTokenIsValid;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +29,14 @@ Route::post('/name', function (Request $request) {
 
     return 'Hej ' ;
 });
+
+Route::get('/frontpageData', function (Request $request) { 
+
+    return 'Hej ' ;
+})->middleware(EnsureTokenIsValid::class);
+
+
+
 
 
 Route::post('/register', [UserController::class, 'create']);
