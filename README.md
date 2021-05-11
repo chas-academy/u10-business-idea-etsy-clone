@@ -7,14 +7,14 @@
   Indentering: Tabs
   
 # Installation
+## Backend
   cd backend
-  
+ 
   composer install
   
   php artisan serve
   
-  
-  (ny terminal)
+## Frontend
   cd frontend
   
   npm install
