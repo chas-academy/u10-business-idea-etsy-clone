@@ -14,24 +14,19 @@ class UserController extends Controller
 
     protected function create()
     {
-
         $exists = User::where('email', request('email'))->first()?->exists;
         if ($exists === null) {
             $user = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
-                'api_token' => Str::random(60)
+                'api_token' => Str::random(60)  
             ]);
             return 1;
         } else {
             return 0;
         }
-
- 
     }
-
-
 
     protected function login()
     {
@@ -41,7 +36,6 @@ class UserController extends Controller
 
         $user = User::where('email', $email)->first();
         
-
         if ($user !== null) {
             $hashedPassword = $user->password;
             if (Hash::check($password, $hashedPassword)) {
@@ -52,7 +46,6 @@ class UserController extends Controller
         } else {
             return 0;
         }
-
  
     }
 }

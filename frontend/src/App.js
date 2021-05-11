@@ -2,6 +2,7 @@ import loading_svg from "./assets/images/loader.svg";
 import axios from "axios";
 import "./App.css";
 import { useEffect, useState } from "react";
+import Frontpage from "./Components/Frontpage";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -9,14 +10,10 @@ function App() {
   const [email, setEmail] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
-
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_URL + "/test").then((response) => {
-      console.log(response.data);
-    });
-  }, []);
+  const [isLogin, setIsLogin] = useState(true);
+  const [token, setToken] = useState(
+    localStorage.getItem("token") === "false" ? false : true
+  );
 
   const Register = (callback) => {
     const data = {
@@ -44,8 +41,8 @@ function App() {
     axios.post(process.env.REACT_APP_URL + "/login", data).then((response) => {
       if (response.data) {
         setToken(response.data);
+        console.log("token", token);
         localStorage.token = response.data;
-        alert("Login successfull");
       } else {
         alert("Login failed, Invalid username or password.");
       }
@@ -54,17 +51,12 @@ function App() {
   };
 
   return token ? (
-    <div>
-      <h1>Homepage</h1>
-      <button
-        onClick={() => {
-          localStorage.token = false;
-          setToken(false);
-        }}
-      >
-        Logout
-      </button>
-    </div>
+    <Frontpage
+      logout={() => {
+        setToken(false);
+        localStorage.removeItem("token");
+      }}
+    />
   ) : (
     <div className="loginForm">
       <h1>{isLogin ? "Login" : "Register"}</h1>
