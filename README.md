@@ -7,14 +7,14 @@
   Indentering: Tabs
   
 # Installation
-### Backend
+## Backend
   cd backend
  
   composer install
   
   php artisan serve
   
-### Frontend
+## Frontend
   cd frontend
   
   npm install
