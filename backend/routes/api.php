@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Middleware\EnsureTokenIsValid;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,10 +27,27 @@ Route::get('/test', function (Request $request) {
     return $users;
 });
 
-Route::post('/name', function (Request $request) { 
+Route::post('/register', [UserController::class, 'create']);
 
-    return 'Hej ' ;
-});
+
+Route::get('/products', [ProductController::class, 'index']);
+
+Route::get('/products/{id}', [ProductController::class, 'show']);
+
+Route::post('/products', [ProductController::class, 'store']);
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
+
+Route::get('/orders', [OrderController::class, 'index']);
+
+Route::get('/orders/{id}', [OrderController::class, 'show']);
+
+Route::post('/orders', [OrderController::class, 'store']);
+
+Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+
+
 
 Route::get('/frontpageData', function (Request $request) { 
 
