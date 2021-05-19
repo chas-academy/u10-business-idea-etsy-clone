@@ -47,19 +47,6 @@ const useStyles = makeStyles((theme) => ({
     toolbar: {
       flexWrap: 'wrap',
     },
-    heroContent: {
-      padding: theme.spacing(8, 0, 6),
-    },
-    cardHeader: {
-      backgroundColor:
-      etzy.palette.primary.main,
-    },
-    cardPricing: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'baseline',
-      marginBottom: theme.spacing(2),
-    },
     footer: {
       borderTop: `1px solid ${theme.palette.divider}`,
       marginTop: theme.spacing(8),
