@@ -1,10 +1,10 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import useStyles from '../../theme';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 function Header() {
     const classes = useStyles();
@@ -16,16 +16,16 @@ function Header() {
           </span>
           <InputBase
               className={classes.search}
-              placeholder="Search…"
+              placeholder="Search for anything"
               inputProps={{ 'aria-label': 'search' }}
             />
           <nav>
             <IconButton href="#" color="primary">
                 <ShoppingCartIcon />
             </IconButton>
-            <Button href="#" color="primary" variant="outlined" className={classes.link}>
-                Sign in
-            </Button>
+            <IconButton href="#" color="primary">
+                <AccountCircle />
+            </IconButton>
           </nav>
         </Toolbar>
       </AppBar>

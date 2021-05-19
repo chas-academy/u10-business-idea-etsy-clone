@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     search: {
         background: `${etzy.palette.primary.light}`,
         margin: '10px',
-        padding: '3px',
+        padding: '5px',
         width: '450px',
     },
     toolbar: {
