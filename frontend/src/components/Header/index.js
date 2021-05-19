@@ -5,8 +5,9 @@ import InputBase from '@material-ui/core/InputBase';
 import useStyles from '../../theme';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Categories from '../Categories/index';
 
-function Header() {
+function Header(props) {
     const classes = useStyles();
 
     return <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
@@ -28,6 +29,7 @@ function Header() {
             </IconButton>
           </nav>
         </Toolbar>
+        <Categories categories={props.categories} />
       </AppBar>
 }
 
