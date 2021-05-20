@@ -1,8 +1,36 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import loading_svg from "./assets/images/loader.svg";
 import axios from "axios";
 import "./App.css";
-import { useEffect, useState } from "react";
-import Frontpage from "./Components/front-page/Frontpage";
+//import Frontpage from "./Components/Frontpage";
+
+export default function Loginpage(props) {
+  useEffect(() => {
+    const headers = { headers: { token: localStorage.token } };
+    axios
+      .get(process.env.REACT_APP_URL + "/frontpageData", headers)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <div>
+      <h1>Loginpage</h1>
+      <button
+        onClick={() => {
+          props.logout();
+        }}
+      >
+        Logout
+      </button>
+    </div>
+  );
+}
 
 function App() {
   const [username, setUsername] = useState("");
