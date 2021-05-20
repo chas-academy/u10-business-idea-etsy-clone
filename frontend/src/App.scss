@@ -44,3 +44,27 @@
     }
   }
 }
+
+.categories {
+  display: flex;
+  align-items: center;
+
+  li {
+      margin: 8px;
+
+      a, &:active, &:hover, &:visited {
+          text-decoration: none;
+          color: #000;
+      }
+
+      a:hover {
+          color: #A13C3C;
+      }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .categories {
+      display: block;
+  }
+}
