@@ -29,6 +29,7 @@ Route::get('/test', function (Request $request) {
 
 Route::post('/register', [UserController::class, 'create']);
 
+Route::post('/buy', [OrderController::class, 'buy']);
 
 Route::get('/products', [ProductController::class, 'index']);
 

@@ -116,7 +116,7 @@ function App() {
         }}
       >
         {loading ? (
-          <img src={loading_svg} />
+          <img src={loading_svg} alt=""/>
         ) : isLogin ? (
           "Logga in"
         ) : (
