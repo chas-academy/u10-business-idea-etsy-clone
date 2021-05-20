@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -29,6 +30,7 @@ class ProductFactory extends Factory
             'stock' => $this->faker->randomNumber(1),
             'description' => $this->faker->paragraph(),
             'picture' => $this->faker->imageUrl(640, 480, 'animals', true),
+            'categories_id' => Category::factory(),
         ];
     }
 }
