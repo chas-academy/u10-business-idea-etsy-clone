@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 class UserController extends Controller
 {
-   
+
 
     protected function create()
     {
@@ -46,6 +46,6 @@ class UserController extends Controller
         } else {
             return 0;
         }
- 
+
     }
 }
