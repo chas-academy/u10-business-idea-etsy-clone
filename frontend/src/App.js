@@ -3,7 +3,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
-import Footer from './Components/Footer/index';
+import Footer from './components/Footer/index';
 // import Products from './components/Products/Products';
 import './App.scss';
 
