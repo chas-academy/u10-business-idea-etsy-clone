@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Header from './Components/Header/index';
-import Footer from './Components/footer/index';
-import Products from './Components/Produkts/Products';
+import Header from './components/Header/index';
+import Footer from './components/Footer/index';
+import Products from './components/Products/Products';
 import './App.scss';
 
 export default function App() {
