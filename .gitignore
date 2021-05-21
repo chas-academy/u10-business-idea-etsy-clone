@@ -2,5 +2,5 @@
 frontend/node_modules/
 /backend/vendor/
 frontend/package-lock.json
-.env
+backend/.env
 

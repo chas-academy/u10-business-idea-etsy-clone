@@ -15,6 +15,7 @@ class OrderController extends Controller
 
     public function show($id) //get all products
     {
+
         return Order::findOrFail($id);
     }
 
@@ -32,11 +33,8 @@ class OrderController extends Controller
         return Order::destroy($id);
     }
 
-    public function buy($productId, $orderId)
+    public function buy($orderId, $productId)
     {
         return Order::find($orderId)->products()->attach($productId);
-        // $order = Order::findOrFail($orderId);
-        // $order->products()->attach($id);
-        
     }
 }

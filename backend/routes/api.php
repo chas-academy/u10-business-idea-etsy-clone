@@ -30,23 +30,19 @@ Route::get('/test', function (Request $request) {
 Route::post('/register', [UserController::class, 'create']);
 
 
+
+
 Route::get('/products', [ProductController::class, 'index']);
-
 Route::get('/products/{id}', [ProductController::class, 'show']);
-
 Route::post('/products', [ProductController::class, 'store']);
-
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 
 Route::get('/orders', [OrderController::class, 'index']);
-
 Route::get('/orders/{id}', [OrderController::class, 'show']);
-
 Route::post('/orders', [OrderController::class, 'store']);
-
 Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
-
+Route::post('/order/{orderId}/product/{productId}', [OrderController::class, 'buy']);
 
 
 Route::get('/frontpageData', function (Request $request) { 
