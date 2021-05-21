@@ -22,9 +22,7 @@ class CreateProductsTable extends Migration
             $table->smallInteger('stock')->unsigned();
             $table->string('description')->nullable();
             $table->string('picture')->nullable();
-            $table->string('category')->nullable();
             $table->tinyInteger('status')->default('1');
-
         });
     }
 
