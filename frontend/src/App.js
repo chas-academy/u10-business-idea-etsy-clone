@@ -31,7 +31,10 @@ export default function App() {
     'Art & Collectibles',
     'Craft Supplies & Tools'
   ];
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
   return (
     <React.Fragment>
       <CssBaseline />
