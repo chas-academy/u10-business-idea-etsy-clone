@@ -21,7 +21,14 @@ function AddProductForm() {
   return (
     <Formik
       initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
-      validate={values => {}}
+      validate={values => ({
+        name: 'Required',
+        price: 'Required',
+        stock: 'Required',
+        description: 'Required',
+        image: 'Required',
+        category: 'Required'
+      })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
         console.log(values);
@@ -39,6 +46,8 @@ function AddProductForm() {
       }) => (
         <form onSubmit={handleSubmit} className={classes.root}>
           <TextField
+            error={errors.name && touched.name && errors.name}
+            helperText={errors.name}
             name="name"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -46,9 +55,10 @@ function AddProductForm() {
             variant="outlined"
             label="Name"
           />
-          {errors.name && touched.name && errors.name}
 
           <TextField
+            error={errors.price && touched.price && errors.price}
+            helperText={errors.price}
             name="price"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -56,8 +66,10 @@ function AddProductForm() {
             variant="outlined"
             label="Price"
           />
-          {errors.price && touched.price && errors.price}
+
           <TextField
+            error={errors.stock && touched.stock && errors.stock}
+            helperText={errors.stock}
             name="stock"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -65,8 +77,10 @@ function AddProductForm() {
             variant="outlined"
             label="Stock"
           />
-          {errors.stock && touched.stock && errors.stock}
+
           <TextField
+            error={errors.description && touched.description && errors.description}
+            helperText={errors.description}
             name="description"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -74,8 +88,10 @@ function AddProductForm() {
             variant="outlined"
             label="Description"
           />
-          {errors.description && touched.description && errors.description}
+
           <TextField
+            error={errors.image && touched.image && errors.image}
+            helperText={errors.image}
             name="image"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -83,8 +99,10 @@ function AddProductForm() {
             variant="outlined"
             label="Image"
           />
-          {errors.image && touched.image && errors.image}
+
           <TextField
+            error={errors.category && touched.category && errors.category}
+            helperText={errors.category}
             name="category"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -92,7 +110,6 @@ function AddProductForm() {
             variant="outlined"
             label="Category"
           />
-          {errors.category && touched.category && errors.category}
 
           <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">
             Submit
