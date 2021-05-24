@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +18,8 @@ use App\Http\Controllers\OrderController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/categories/{slug}', [CategoryController::class, 'getCategory']);
+Route::apiResource('categories', CategoryController::class);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -49,9 +52,6 @@ Route::get('/frontpageData', function (Request $request) {
 
     return 'Hej ' ;
 })->middleware(EnsureTokenIsValid::class);
-
-
-
 
 
 Route::post('/register', [UserController::class, 'create']);
