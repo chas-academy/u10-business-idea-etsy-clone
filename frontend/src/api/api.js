@@ -7,4 +7,10 @@ export default class api {
        .then(response => response.data)
        .catch(error => error)
     }
+
+    static getCategory(slug) {
+        return axios.get(`${process.env.REACT_APP_URL}categories/${slug}`)
+       .then(response => response.data)
+       .catch(error => error)
+    }
 }
