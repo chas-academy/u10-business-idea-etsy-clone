@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
 import Footer from './Components/Footer/index';
-import ProductCard from './Components/Product-card/Card';
 import Products from './Components/Products/Products';
 import './App.scss';
 
@@ -13,7 +12,7 @@ export default function App() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   //API connection
   const getProducts = async () => {
@@ -40,11 +39,6 @@ export default function App() {
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
-      <ProductCard
-        name={'Test Product Name'}
-        description={'This is the testproduct Description'}
-        categorie={'Arts'}
-      ></ProductCard>
       <Footer />
     </React.Fragment>
   );
