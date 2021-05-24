@@ -1,27 +1,27 @@
 import React from 'react';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
 import Footer from './Components/Footer/index';
 import ProductCard from './Components/Product-card/Card';
-// import Products from './components/Products/Products';
+import Products from './Components/Products/Products';
 import './App.scss';
 
 export default function App() {
-  // const [products, setProducts] = useState();
+  const [products, setProducts] = useState();
 
-  // useEffect(() => {
-  //   // getProducts();
-  // });
+  useEffect(() => {
+    getProducts();
+  });
 
   //API connection
-  // const getProducts = async () => {
-  //   const api_call = await fetch(`http://localhost/api/products`);
-  //   const data = await api_call.json();
-  //   console.log(data);
-  //   setProducts(data);
-  // };
+  const getProducts = async () => {
+    const api_call = await fetch(`http://localhost/api/products`);
+    const data = await api_call.json();
+    console.log(data);
+    setProducts(data);
+  };
 
   //Temp
   let categories = [
@@ -37,7 +37,7 @@ export default function App() {
       <CssBaseline />
       <Header categories={categories} />
       <Container maxWidth="md" component="main">
-        {/* <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</> */}
+        <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
       <ProductCard></ProductCard>
       <Footer />
