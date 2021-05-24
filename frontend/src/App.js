@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index'; 
 import Footer from './Components/Footer/index';
+import api from './api/api';
 import './App.scss';
 
 
 export default function App() {
-  //Temp
-  let categories = [
-    "Clothing & Shoes",
-    "Home & Living",
-    "Wedding & Party",
-    "Toys & Entertainment",
-    "Art & Collectibles",
-    "Craft Supplies & Tools",
-  ]
+  const [categories, setCategories] = useState(() => []);
+
+  useEffect(() => {
+      api.getCategories().then((res) => {
+        setCategories(res);
+      });
+  }, []);
+
   return (
     <React.Fragment>
       <CssBaseline />
