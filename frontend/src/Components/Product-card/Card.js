@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ProductCard() {
+export default function ProductCard({ name, description, categorie }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -60,8 +60,8 @@ export default function ProductCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Product"
-        subheader="Category"
+        title={name}
+        subheader={categorie}
       />
       <CardMedia
         className={classes.media}
@@ -70,7 +70,7 @@ export default function ProductCard() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive ring.....
+          Text description 2
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -94,7 +94,7 @@ export default function ProductCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>More info:</Typography>
-          <Typography paragraph>This ring was made by the elven lords of Rivendell.</Typography>
+          <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
     </Card>

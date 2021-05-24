@@ -20,6 +20,7 @@ export default function App() {
     const api_call = await fetch(`http://localhost/api/products`);
     const data = await api_call.json();
     console.log(data);
+
     setProducts(data);
   };
 
@@ -39,7 +40,11 @@ export default function App() {
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
-      <ProductCard></ProductCard>
+      <ProductCard
+        name={'Test Product Name'}
+        description={'This is the testproduct Description'}
+        categorie={'Arts'}
+      ></ProductCard>
       <Footer />
     </React.Fragment>
   );
