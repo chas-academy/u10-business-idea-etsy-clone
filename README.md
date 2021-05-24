@@ -2,7 +2,11 @@
 
 # Kodstandard
 
-Variabelnamn: lowerCamelCase
+Variable name: lowerCamelCase
+
+Component name: PascalCase
+
+Folder name: PascalCase
 
 Indentering: Tabs
 

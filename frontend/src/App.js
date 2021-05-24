@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Header from './Components/Header/index';
-import Footer from './Components/Footer/index';
-import ProductCard from './Components/Product-card/Card';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
+import ProductCard from './Components/ProductCard/Card';
 import Products from './Components/Products/Products';
 import './App.scss';
 
@@ -39,7 +39,6 @@ export default function App() {
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
-      <ProductCard></ProductCard>
       <Footer />
     </React.Fragment>
   );
