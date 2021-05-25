@@ -6,6 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
 import { TextareaAutosize } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +23,14 @@ const useStyles = makeStyles(theme => ({
     descriptionField: {
       height: '200px'
     }
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    width: '50ch'
   }
 }));
 
@@ -49,90 +60,95 @@ function AddProductForm() {
         handleSubmit,
         isSubmitting
         /* and other goodies */
-      }) => (
-        <form onSubmit={handleSubmit} className={classes.root}>
-          <TextField
-            error={errors.name && touched.name && errors.name}
-            helperText={errors.name}
-            name="name"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.name}
-            variant="outlined"
-            label="Name"
-          />
-          <TextField
-            error={errors.price && touched.price && errors.price}
-            helperText={errors.price}
-            name="price"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.price}
-            variant="outlined"
-            label="Price"
-          />
-          <TextField
-            error={errors.stock && touched.stock && errors.stock}
-            helperText={errors.stock}
-            name="stock"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.stock}
-            variant="outlined"
-            label="Stock"
-          />
-          <TextField
-            error={errors.description && touched.description && errors.description}
-            helperText={errors.description}
-            name="description"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.description}
-            variant="outlined"
-            label="Description"
-            className={classes.descriptionField}
-          />
-          <TextField
-            error={errors.image && touched.image && errors.image}
-            helperText={errors.image}
-            name="image"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.image}
-            variant="outlined"
-            label="Image"
-          />
-          <InputLabel htmlFor="outlined-category">Category</InputLabel>
-          <Select
-            native
-            value={values.category}
-            onChange={handleChange}
-            label="Category"
-            inputProps={{
-              name: 'category',
-              id: 'outlined-age-native-simple'
-            }}
-          >
-            <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
-          </Select>
-          {/* <TextField
-            error={errors.category && touched.category && errors.category}
-            helperText={errors.category}
-            name="category"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.category}
-            variant="outlined"
-            label="Category"
-          /> */}
-          <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">
-            Submit
-          </Button>
-        </form>
-      )}
+      }) => {
+        console.log({ errors, touched });
+        return (
+          <form onSubmit={handleSubmit} className={classes.root}>
+            <TextField
+              error={!!errors.name && touched.name}
+              helperText={errors.name}
+              name="name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+              variant="outlined"
+              label="Name"
+            />
+            <TextField
+              error={!!errors.price && touched.price}
+              helperText={errors.price}
+              name="price"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.price}
+              variant="outlined"
+              label="Price"
+            />
+            <TextField
+              error={!!errors.stock && touched.stock}
+              helperText={errors.stock}
+              name="stock"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.stock}
+              variant="outlined"
+              label="Stock"
+            />
+            <TextField
+              error={!!errors.description && touched.description}
+              helperText={errors.description}
+              name="description"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.description}
+              variant="outlined"
+              label="Description"
+              className={classes.descriptionField}
+            />
+            <TextField
+              error={!!errors.image && touched.image}
+              helperText={errors.image}
+              name="image"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.image}
+              variant="outlined"
+              label="Image"
+            />
+
+            <FormControl
+              className={classes.formControl}
+              error={!!errors.category && touched.category}
+              variant="outlined"
+            >
+              <InputLabel htmlFor="outlined-category">Category</InputLabel>
+              <Select
+                value={values.category}
+                onChange={handleChange}
+                label="Category"
+                inputProps={{
+                  name: 'category',
+                  id: 'outlined-age-native-simple'
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              {!!errors.category && touched.category ? (
+                <FormHelperText>Error</FormHelperText>
+              ) : null}
+            </FormControl>
+
+            <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">
+              Submit
+            </Button>
+          </form>
+        );
+      }}
     </Formik>
   );
 }

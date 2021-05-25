@@ -54,3 +54,11 @@ npm install
 npm start
 
 Backend URL = 'https://u10-backend.herokuapp.com/'
+
+## Dependencies
+
+- Node 15
+
+## To choose Node version
+
+https://tecadmin.net/install-nvm-macos-with-homebrew/
