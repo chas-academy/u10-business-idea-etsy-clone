@@ -4,7 +4,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
 import Footer from './Components/Footer/index';
+
+
+
+import CategoryCard from './Components/Category-card/Card';
+
+
 import Products from './Components/Products/Products';
+
 import './App.scss';
 
 export default function App() {
@@ -39,6 +46,10 @@ export default function App() {
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
+
+
+      <CategoryCard></CategoryCard>
+
       <Footer />
     </React.Fragment>
   );
