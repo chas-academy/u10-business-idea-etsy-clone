@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Products from './Components/Products/Products';
+
 import './App.scss';
 
 export default function App() {
@@ -14,13 +15,14 @@ export default function App() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   //API connection
   const getProducts = async () => {
     const api_call = await fetch(`http://localhost/api/products`);
     const data = await api_call.json();
     console.log(data);
+
     setProducts(data);
   };
 
