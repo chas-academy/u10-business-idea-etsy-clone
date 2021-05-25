@@ -25,16 +25,14 @@ export default function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Header categories={categories} />
-      <Container maxWidth="md" component="main">
-        <Router>
-          <Switch>
-            <Route path="/c/:slug?">
-              <Category />
-            </Route>
-          </Switch>
-        </Router>
-      </Container>
+      <Router>
+        <Header categories={categories} />
+        <Container maxWidth="md" component="main">
+            <Switch>
+              <Route path="/c/:slug" component={Category} />
+            </Switch>
+        </Container>
+      </Router>
       <Footer />
     </React.Fragment>
   );
