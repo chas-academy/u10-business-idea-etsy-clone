@@ -5,7 +5,12 @@ import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
 import Footer from './Components/Footer/index';
 import ProductCard from './Components/Product-card/Card';
+
+import CategoryCard from './Components/Category-card/Card';
+
+
 import Products from './Components/Products/Products';
+
 import './App.scss';
 
 export default function App() {
@@ -40,6 +45,7 @@ export default function App() {
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
       <ProductCard></ProductCard>
+      <CategoryCard></CategoryCard>
       <Footer />
     </React.Fragment>
   );
