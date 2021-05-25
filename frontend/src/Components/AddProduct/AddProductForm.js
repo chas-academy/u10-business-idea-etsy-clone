@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import api from '../../api/api';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,11 +41,6 @@ const AddProductSchema = Yup.object().shape({
 
 function AddProductForm() {
   const classes = useStyles();
-  const [category, setCategory] = useState();
-
-  useEffect(() => {
-    api.getCategories();
-  }, []);
 
   const categories = [
     { label: 'Shoes', value: 'shoes' },
@@ -72,7 +66,6 @@ function AddProductForm() {
         isSubmitting
         /* and other goodies */
       }) => {
-        console.log({ errors, touched });
         return (
           <form onSubmit={handleSubmit} className={classes.root}>
             <TextField
