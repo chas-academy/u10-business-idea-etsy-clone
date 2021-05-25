@@ -32,6 +32,7 @@ Or to Use Docker to spin up server:
 ```bash
 composer require laravel/sail --dev
 php artisan sail:install
+./vendor/bin/sail composer install
 ```
 
 2. Change the env variables in .env:
