@@ -62,3 +62,8 @@ Backend URL = 'https://u10-backend.herokuapp.com/'
 ## To choose Node version
 
 https://tecadmin.net/install-nvm-macos-with-homebrew/
+
+## Todo
+
+- change name of .env file in frontend
+- add DS_Store to gitignore file

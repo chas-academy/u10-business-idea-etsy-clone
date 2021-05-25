@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import { TextareaAutosize } from '@material-ui/core';
+import api from '../../api/api';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,9 +19,6 @@ const useStyles = makeStyles(theme => ({
     },
     '& > *': {
       margin: theme.spacing(1)
-    },
-    descriptionField: {
-      height: '200px'
     }
   },
   container: {
@@ -32,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     width: '50ch'
   }
+  // descriptionField: {
+  //   height: '200px'
+  // }
 }));
 
 const AddProductSchema = Yup.object().shape({
@@ -42,6 +42,17 @@ const AddProductSchema = Yup.object().shape({
 
 function AddProductForm() {
   const classes = useStyles();
+  const [category, setCategory] = useState();
+
+  useEffect(() => {
+    api.getCategories();
+  }, []);
+
+  const categories = [
+    { label: 'Shoes', value: 'shoes' },
+    { label: 'Wedding', value: 'wedding' },
+    { label: 'Jewellery', value: 'jewellery' }
+  ];
   return (
     <Formik
       initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
@@ -134,9 +145,11 @@ function AddProductForm() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category.value}>
+                    {category.label}
+                  </MenuItem>
+                ))}
               </Select>
               {!!errors.category && touched.category ? (
                 <FormHelperText>Error</FormHelperText>
