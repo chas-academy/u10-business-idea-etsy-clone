@@ -4,7 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/index';
 import Footer from './Components/Footer/index';
-import ProductCard from './Components/Product-card/Card';
+
+
 
 import CategoryCard from './Components/Category-card/Card';
 
@@ -18,13 +19,14 @@ export default function App() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   //API connection
   const getProducts = async () => {
     const api_call = await fetch(`http://localhost/api/products`);
     const data = await api_call.json();
     console.log(data);
+
     setProducts(data);
   };
 
@@ -44,8 +46,10 @@ export default function App() {
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
       </Container>
-      <ProductCard></ProductCard>
+
+
       <CategoryCard></CategoryCard>
+
       <Footer />
     </React.Fragment>
   );
