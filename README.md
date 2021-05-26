@@ -63,3 +63,7 @@ Backend URL = 'https://u10-backend.herokuapp.com/'
 ## To choose Node version
 
 https://tecadmin.net/install-nvm-macos-with-homebrew/
+
+## TODO
+
+- fix complete validation of form

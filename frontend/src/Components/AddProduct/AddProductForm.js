@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import api from '../../api/api';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,9 +52,9 @@ function AddProductForm(props) {
     <Formik
       initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
       validationSchema={AddProductSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
+        const result = await api.postProduct(values);
         setSubmitting(false);
-        console.log(values);
       }}
     >
       {({

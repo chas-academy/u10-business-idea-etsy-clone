@@ -21,4 +21,9 @@ export default class api {
       .then(response => response.data)
       .catch(error => error);
   }
+
+  static postProduct(product) {
+    console.log('checking if the api works');
+    return axios.post(`${process.env.REACT_APP_URL}/products`, product);
+  }
 }
