@@ -15,12 +15,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            ['title' => 'Clothing & Shoes'],
-            ['title' => 'Home & Living'],
-            ['title' => 'Wedding & Party'],
-            ['title' => 'Toys & Entertainment'],
-            ['title' => 'Art & Collectibles'],
-            ['title' => 'Craft Supplies & Tools'],
+            ['title' => 'Clothing & Shoes', 'slug' => 'clothing-shoes'],
+            ['title' => 'Home & Living', 'slug' => 'home-living'],
+            ['title' => 'Wedding & Party', 'slug' => 'wedding-party'],
+            ['title' => 'Toys & Entertainment', 'slug' => 'toys-entertainment'],
+            ['title' => 'Art & Collectibles', 'slug' => 'art-collectibles'],
+            ['title' => 'Craft Supplies & Tools', 'slug' => 'craft-supplies'],
         ]);
     }
 }
