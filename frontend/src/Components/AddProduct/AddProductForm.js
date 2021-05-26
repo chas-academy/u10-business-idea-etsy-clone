@@ -39,14 +39,14 @@ const AddProductSchema = Yup.object().shape({
   stock: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required')
 });
 
-function AddProductForm() {
+function AddProductForm(props) {
   const classes = useStyles();
 
-  const categories = [
-    { label: 'Shoes', value: 'shoes' },
-    { label: 'Wedding', value: 'wedding' },
-    { label: 'Jewellery', value: 'jewellery' }
-  ];
+  const categories = props.categories.map(category => ({
+    label: category.title,
+    value: category.slug
+  }));
+
   return (
     <Formik
       initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
