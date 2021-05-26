@@ -37,7 +37,10 @@ const useStyles = makeStyles(theme => ({
 const AddProductSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   price: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required'),
-  stock: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required')
+  stock: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required'),
+  description: Yup.string().min(1, 'Too Short!').max(500, 'Too Long!').required('Required'),
+  image: Yup.string().min(2, 'Too Short!').max(200, 'Too Long!').required('Required'),
+  category: Yup.string().required('Please select a category!')
 });
 
 function AddProductForm(props) {
@@ -53,7 +56,8 @@ function AddProductForm(props) {
       initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
       validationSchema={AddProductSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        const result = await api.postProduct(values);
+        console.log(values);
+        await api.postProduct(values);
         setSubmitting(false);
       }}
     >
@@ -132,8 +136,7 @@ function AddProductForm(props) {
                 onChange={handleChange}
                 label="Category"
                 inputProps={{
-                  name: 'category',
-                  id: 'outlined-age-native-simple'
+                  name: 'category'
                 }}
               >
                 <MenuItem value="">
