@@ -33,11 +33,6 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: `1px solid ${theme.palette.divider}`,
       alignItems: 'center',
     },
-    logo: {
-        fill: `${etzy.palette.primary.main}`,
-        marginTop: '5px',
-        width: '100px',
-    },
     search: {
         background: `${etzy.palette.primary.light}`,
         margin: '10px',
