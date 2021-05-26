@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AddProductForm from './Components/AddProduct/AddProductForm';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/Header';
@@ -39,6 +41,18 @@ export default function App() {
       <Header categories={categories} />
       <Container maxWidth="md" component="main">
         <>{products ? <Products data={products} /> : <h3>No Products to show</h3>}</>
+
+        <Router>
+          <Switch>
+            {/* <Route path='/add-product' component={AddProductForm} /> */}
+            {/* <Route path="/add-product"><AddProductForm /></Route> */}
+          </Switch>
+          <Route path="/">{<h1>Home</h1>}</Route>
+          <Route path="/add-product">
+            <AddProductForm />
+          </Route>
+          {/* <Route path="/add-product" render={() => (<> <AddProductForm /> </> )}/> */}
+        </Router>
       </Container>
       <Footer />
     </React.Fragment>

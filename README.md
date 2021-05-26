@@ -32,6 +32,7 @@ Or to Use Docker to spin up server:
 ```bash
 composer require laravel/sail --dev
 php artisan sail:install
+./vendor/bin/sail composer install
 ```
 
 2. Change the env variables in .env:
@@ -54,3 +55,16 @@ npm install
 npm start
 
 Backend URL = 'https://u10-backend.herokuapp.com/'
+
+## Dependencies
+
+- Node 15
+
+## To choose Node version
+
+https://tecadmin.net/install-nvm-macos-with-homebrew/
+
+## Todo
+
+- change name of .env file in frontend
+- add DS_Store to gitignore file
