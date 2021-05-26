@@ -1,5 +1,15 @@
+import ProductCard from '../ProductCard/Card';
+
 const Product = ({ data }) => {
-  return <h3>{data.name}</h3>;
+  return (
+    <>
+      <ProductCard
+        name={data.name}
+        description={data.description}
+        categorie={data.categorie}
+      ></ProductCard>
+    </>
+  );
 };
 
 export default Product;
