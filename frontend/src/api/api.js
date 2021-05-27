@@ -28,4 +28,18 @@ export default class api {
       .then(response => response.data)
       .catch(error => error);
   }
+
+  static postLoginForm(user) {
+    return axios
+      .post(`${process.env.REACT_APP_URL}/login`, user)
+      .then((response) => {
+        if (response.data) {
+          localStorage.token = response.data;
+          console.log('Login successful')
+        } else {
+          console.log('Login failed')
+        }
+      })
+      .catch(error => error);
+  }
 }
