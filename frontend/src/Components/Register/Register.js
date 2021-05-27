@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RegisterSchema = Yup.object().shape({
-  username: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   email: Yup.string().email().required('Required'),
   password: Yup.string()
     .required('Password is required')
