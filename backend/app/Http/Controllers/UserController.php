@@ -12,9 +12,12 @@ class UserController extends Controller
 {
 
 
-    protected function create()
+    protected function create()    
     {
-        $exists = User::where('email', request('email'))->first()?->exists;
+        // OBS: Använda översta kommandot om du har PHP 8
+        // $exists = User::where('email', request('email'))->first()?->exists;
+        $exists = User::where('email', request('email'))->first();
+
         if ($exists === null) {
             $user = User::create([
                 'name' => request('name'),
