@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
 use Money\Currency;
 use Money\Converter;
 use Money\Currencies\ISOCurrencies;
@@ -16,26 +17,39 @@ class ProductController extends Controller
     //get all, getOneProduct
     //create product, update product, delete product
 
-    public function index($category = null) //get all products or from specific category
+    public function index(Request $request) //get all products or from specific category or user
     { 
         $userCurrency = 'SEK';      //Temp, later a get param
         $products = null;
 
-        if ($category) {
-            $catId = Category::where('slug', $category)->get()[0]->id;
-            $products = Product::where('categories_id', $catId)->get();
+        if ($request->route('category')) {
+            $catId = Category::where('slug', $request->route('category'))->get();
+
+            if ($catId && $catId->count() > 0) {
+                $products = Product::where('categories_id', $catId[0]->id)->get();
+            }
+        }
+        else if ($request->route('userId')) {
+            $products = Product::where('user_id', $request->route('userId'))->get();
         }
         else {
             $products = Product::all();
         }
 
-        foreach ($products as $product) {
-            if ($product->currency !== $userCurrency) {
-                $convertCurrency = $this->convertCurrency($product->price, $product->currency, $userCurrency);
-
-                $product->price = $convertCurrency['price'];
-                $product->currency = $convertCurrency['currency'];
+        if ($products && $products->count() > 0) {
+            foreach ($products as $product) {
+                if ($product->currency !== $userCurrency) {
+                    $convertCurrency = $this->convertCurrency($product->price, $product->currency, $userCurrency);
+    
+                    $product->price = $convertCurrency['price'];
+                    $product->currency = $convertCurrency['currency'];
+                }
             }
+        }
+    
+        if ($request->route('userId')) {
+            $store = User::where('id', $request->route('userId'))->get(['id', 'name']);
+            return ['store' => $store, 'products' => $products];
         }
 
         return $products; 
