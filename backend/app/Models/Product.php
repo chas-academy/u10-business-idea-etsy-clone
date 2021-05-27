@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
     
     protected $fillable = ['user_id', 'name', 'price', 'stock', 'description', 'picture', 'categories_id', 'status'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function orders(){
         return $this->belongsToMany(Order::class);
