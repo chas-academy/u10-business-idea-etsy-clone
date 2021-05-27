@@ -38,8 +38,8 @@ const AddProductSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   price: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required'),
   stock: Yup.string().matches(/^\d+$/, 'The field should have digits only').required('Required'),
-  description: Yup.string().min(1, 'Too Short!').max(500, 'Too Long!').required('Required'),
-  image: Yup.string().min(2, 'Too Short!').max(200, 'Too Long!').required('Required'),
+  description: Yup.string().min(1, 'Too Short!').max(500, 'Too Long!'),
+  status: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   category: Yup.string().required('Please select a category!')
 });
 
@@ -53,7 +53,7 @@ function AddProductForm(props) {
 
   return (
     <Formik
-      initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
+      initialValues={{ name: '', price: '', stock: '', description: '', status: '', category: '' }}
       validationSchema={AddProductSchema}
       onSubmit={async (values, { setSubmitting }) => {
         console.log(values);
@@ -115,14 +115,14 @@ function AddProductForm(props) {
               className={classes.descriptionField}
             />
             <TextField
-              error={!!errors.image && touched.image}
-              helperText={errors.image}
-              name="image"
+              error={!!errors.status && touched.status}
+              helperText={errors.status}
+              name="status"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.image}
+              value={values.status}
               variant="outlined"
-              label="Image"
+              label="Status"
             />
 
             <FormControl

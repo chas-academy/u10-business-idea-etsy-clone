@@ -18,6 +18,7 @@ use App\Http\Controllers\CategoryController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('/categories/{slug}', [CategoryController::class, 'getCategory']);
 Route::apiResource('categories', CategoryController::class);
 
@@ -49,9 +50,9 @@ Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 Route::post('/order/{orderId}/product/{productId}', [OrderController::class, 'buy']);
 
 
-Route::get('/frontpageData', function (Request $request) { 
+Route::get('/frontpageData', function (Request $request) {
 
-    return 'Hej ' ;
+    return 'Hej ';
 })->middleware(EnsureTokenIsValid::class);
 
 

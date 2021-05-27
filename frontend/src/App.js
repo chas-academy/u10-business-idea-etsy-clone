@@ -18,8 +18,10 @@ export default function App() {
 
   useEffect(() => {
     api.getProducts().then(res => {
-      console.log({ res });
-      if (res) setProducts(res);
+      console.log(res);
+      if (res) {
+        setProducts(res);
+      }
     });
 
     api.getCategories().then(res => {
