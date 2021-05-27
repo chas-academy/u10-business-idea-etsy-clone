@@ -21,4 +21,11 @@ export default class api {
       .then(response => response.data)
       .catch(error => error);
   }
+
+  static postRegisterForm(user) {
+    return axios
+      .post(`${process.env.REACT_APP_URL}/register`, user)
+      .then(response => response.data)
+      .catch(error => error);
+  }
 }

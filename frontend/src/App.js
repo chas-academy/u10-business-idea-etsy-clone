@@ -11,6 +11,7 @@ import Products from './Components/Products/Products';
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AddProductForm from './Components/AddProduct/AddProductForm';
+import Register from './Components/Register/Register';
 
 export default function App() {
   const [products, setProducts] = useState();
@@ -41,10 +42,11 @@ export default function App() {
               </>
             </Route>
             <Route path="/c/:slug" component={Category} />
-          </Switch>
+          </Switch>        
         </Container>
       </Router>
       {categories ? <AddProductForm categories={categories} /> : <h3>No Categories to show</h3>}
+      <Register />
       <Footer />
     </React.Fragment>
   );
