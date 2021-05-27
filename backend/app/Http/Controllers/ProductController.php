@@ -24,9 +24,11 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required', 
-            'stock' => 'required', 
-            'status' => 'required',         
+            'price' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'category' => 'required'
         ]);
         return Product::create($request->all());
     }
@@ -35,5 +37,4 @@ class ProductController extends Controller
     {
         return Product::destroy($id);
     }
-
 }
