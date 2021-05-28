@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('adminadmin'),
-            'api_token' => Str::random(60),
         ]);
 
         DB::table('users')->insert([
@@ -29,7 +28,6 @@ class UserSeeder extends Seeder
             'email' => 'user@user.com',
             'email_verified_at' => now(),
             'password' => Hash::make('useruser'),
-            'api_token' => Str::random(60),
         ]);
     }
 }
