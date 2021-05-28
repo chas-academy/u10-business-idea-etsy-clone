@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -24,6 +25,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 function Login() {
+  let history = useHistory();
   const classes = useStyles();
 
   return (
@@ -32,7 +34,11 @@ function Login() {
         initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          await api.postLoginForm(values);
+          await api.postLoginForm(values).then(response => {
+            if (response.status === 200) {
+              history.push('/profile');
+            }
+          });
           setSubmitting(false);
         }}
       >

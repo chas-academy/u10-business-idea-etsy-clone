@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export default class api {
   static getCategories() {
     return axios
@@ -32,12 +31,14 @@ export default class api {
   static postLoginForm(user) {
     return axios
       .post(`${process.env.REACT_APP_URL}/login`, user)
-      .then((response) => {
+      .then(response => {
         if (response.data) {
           localStorage.token = response.data;
-          console.log('Login successful')
+          console.log('Login successful');
+          return response;
         } else {
-          console.log('Login failed')
+          console.log('Login failed');
+          return response;
         }
       })
       .catch(error => error);

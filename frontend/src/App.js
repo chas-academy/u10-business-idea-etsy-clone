@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AddProductForm from './Components/AddProduct/AddProductForm';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import UserProfile from './Components/UserProfile/UserProfile';
 
 export default function App() {
   const [products, setProducts] = useState();
@@ -54,6 +55,7 @@ export default function App() {
             </Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" component={Login}></Route>
+            <Route path="/profile" component={UserProfile}></Route>
           </Switch>
         </Container>
       </Router>
