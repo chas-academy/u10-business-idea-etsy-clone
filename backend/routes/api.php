@@ -30,7 +30,6 @@ Route::get('/test', function (Request $request) {
     return $users;
 });
 
-Route::post('/register', [UserController::class, 'create']);
 
 Route::post('/buy', [OrderController::class, 'buy']);
 
@@ -55,5 +54,5 @@ Route::get('/frontpageData', function (Request $request) {
 })->middleware(EnsureTokenIsValid::class);
 
 
-Route::post('/register', [UserController::class, 'create']);
+Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
