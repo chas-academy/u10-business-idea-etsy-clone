@@ -43,12 +43,20 @@ export default function App() {
               </>
             </Route>
             <Route path="/c/:slug" component={Category} />
-          </Switch>        
+            <Route path="/add-product">
+              <>
+                {categories ? (
+                  <AddProductForm categories={categories} />
+                ) : (
+                  <h3>No Categories to show</h3>
+                )}
+              </>
+            </Route>
+            <Route path="/register" component={Register}></Route>
+            <Route path="/login" component={Login}></Route>
+          </Switch>
         </Container>
       </Router>
-      {categories ? <AddProductForm categories={categories} /> : <h3>No Categories to show</h3>}
-      <Register />
-      <Login />
       <Footer />
     </React.Fragment>
   );
