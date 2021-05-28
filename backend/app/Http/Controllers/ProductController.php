@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function index(Request $request) //get all products or from specific category or user
     { 
-        $userCurrency = 'SEK';      //Temp, later a get param
+        $userCurrency = 'SEK';      //To be fetched from db or as a get param
         $products = null;
 
         if ($request->route('category')) {
@@ -55,25 +55,36 @@ class ProductController extends Controller
         return $products; 
     }
 
-    public function show($id) //get all products
+    public function show($id)
     {
-        return Product::findOrFail($id);
+        $userCurrency = 'SEK';          //To be fetched from db or as a get param
+        $product = Product::findOrFail($id);
+        
+       if ($product->currency !== $userCurrency) {
+        $convertCurrency = $this->convertCurrency($product->price, $product->currency, $userCurrency);
+    
+        $product->price = $convertCurrency['price'];
+        $product->currency = $convertCurrency['currency'];
+       }
+
+       return $product;
     }
 
-    public function store(Request $request) //get all products
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'price' => 'required', 
             'stock' => 'required', 
-            'status' => 'required',         
+            'status' => 'required',
+            'currency' => 'required',         
         ]);
         return Product::create($request->all());
     }
 
-    public function destroy($id) //get all products
+    public function destroy($id) 
     {
-        return Product::destroy($id);
+        return Product::destroy($id);           //Check if user is auth
     }
 
     private function convertCurrency($price, $from, $to) {
