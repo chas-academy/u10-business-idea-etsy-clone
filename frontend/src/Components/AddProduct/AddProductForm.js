@@ -9,6 +9,12 @@ import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
+import { green } from '@material-ui/core/colors';
+import Radio from '@material-ui/core/Radio';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,11 +33,21 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     width: '50ch'
-  }
-  // descriptionField: {
-  //   height: '200px'
-  // }
-}));
+  },
+  media: {
+    heigth: 150,
+  },
+  radio: {
+    color: green[400],
+    '&$checked': {
+      color: green[600],
+    },
+  },
+  checked: {},
+}))
+
+// ((props) => <Radio color="default" {...props} />);
+
 
 const AddProductSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -41,6 +57,12 @@ const AddProductSchema = Yup.object().shape({
 
 function AddProductForm(props) {
   const classes = useStyles();
+
+  const [selectedValue, setSelectedValue] = React.useState('picture1');
+
+  const handleRadioChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
 
   const categories = props.categories.map(category => ({
     label: category.title,
@@ -109,17 +131,44 @@ function AddProductForm(props) {
               label="Description"
               className={classes.descriptionField}
             />
-            <TextField
-              error={!!errors.image && touched.image}
-              helperText={errors.image}
-              name="image"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.image}
-              variant="outlined"
-              label="Image"
-            />
-
+            <Card className={classes.rootCard}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="./assets/images/ring.jpg"
+                  title="Ring"
+                />
+              </CardActionArea>
+              <CardActions>
+                <Radio
+                  className={classes.radio}
+                  checked={selectedValue === 'picture1'}
+                  onChange={handleRadioChange}
+                  value="picture1"
+                  name="radio-button-demo"
+                  inputProps={{ 'aria-label': 'Picture1' }}
+                />
+              </CardActions>
+            </Card>
+            <Card className={classes.rootCard}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="./assets/images/ring.jpg"
+                  title="Ring"
+                />
+              </CardActionArea>
+              <CardActions>
+                <Radio
+                  className={classes.radio}
+                  checked={selectedValue === 'picture2'}
+                  onChange={handleRadioChange}
+                  value="picture2"
+                  name="radio-button-demo"
+                  inputProps={{ 'aria-label': 'Picture2' }}
+                />
+              </CardActions>
+            </Card>
             <FormControl
               className={classes.formControl}
               error={!!errors.category && touched.category}
