@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     width: '50ch'
   },
   media: {
-    heigth: 150,
+    heigth: 75,
   },
   radio: {
     color: green[400],
@@ -135,7 +135,8 @@ function AddProductForm(props) {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image="./assets/images/ring.jpg"
+                  component="img"
+                  image="ring.jpg"
                   title="Ring"
                 />
               </CardActionArea>
@@ -154,7 +155,8 @@ function AddProductForm(props) {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image="./assets/images/ring.jpg"
+                  component="img"
+                  image="ring.jpg"
                   title="Ring"
                 />
               </CardActionArea>
