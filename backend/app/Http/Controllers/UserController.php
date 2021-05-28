@@ -2,53 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
-
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
 class UserController extends Controller
 {
+    public function register(Request $request) {
+        $validates = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email', 
+            'password' => 'required', 
+            'password_confirm' => 'required',
+        ]);
+    
+        $user = User::create([
+            'name' => request('name'),
+            'password' => Hash::make(request('password')),
+            'email' => request('email'),
+        ]);
 
-
-    protected function create()    
-    {
-        // OBS: Använda översta kommandot om du har PHP 8
-        // $exists = User::where('email', request('email'))->first()?->exists;
-        $exists = User::where('email', request('email'))->first();
-
-        if ($exists === null) {
-            $user = User::create([
-                'name' => request('name'),
-                'email' => request('email'),
-                'password' => Hash::make(request('password')),
-                'api_token' => Str::random(60)  
-            ]);
-            return 1;
-        } else {
-            return 0;
-        }
+        return ['user' => $user];
     }
 
-    protected function login()
-    {
+    public function login(Request $request) {
+        $validates = $request->validate([
+            'email' => 'required', 
+            'password' => 'required', 
+        ]);
 
-        $email = request('email');
-        $password =  request('password');
+        $user = User::where('email', request('email'))->first();
 
-        $user = User::where('email', $email)->first();
-        
-        if ($user !== null) {
-            $hashedPassword = $user->password;
-            if (Hash::check($password, $hashedPassword)) {
-                return $user->api_token;
-            } else {
-                return 0;
-            }
-        } else {
-            return 0;
+        if (Hash::check(request('password'), $user->password)) {
+            $token = $user->createToken($user->name)->plainTextToken;
+            return ['user' => $user, 'token' => $token];
         }
-
+        else {
+            return 'Invalid password';
+        }
     }
 }
