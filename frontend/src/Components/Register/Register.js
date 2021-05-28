@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -15,25 +17,31 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1)
     }
-  },
+  }
 }));
 
 const RegisterSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   email: Yup.string().email().required('Required'),
-  password: Yup.string()
-    .required('Password is required')
+  password: Yup.string().required('Password is required')
 });
 
 function Register() {
+  let history = useHistory();
   const classes = useStyles();
 
   return (
     <Formik
-      initialValues={{ name: '', email: '', password: ''}}
-      validationSchema={ RegisterSchema }
-      onSubmit={async(values, { setSubmitting }) => {
-        await api.postRegisterForm(values);
+      initialValues={{ name: '', email: '', password: '' }}
+      validationSchema={RegisterSchema}
+      onSubmit={async (values, { setSubmitting }) => {
+        console.log(setSubmitting, values);
+        await api.postRegisterForm(values).then(response => {
+          if (!response.error) {
+            console.log('this is the right answer');
+            history.push('/login');
+          }
+        });
         setSubmitting(false);
       }}
     >

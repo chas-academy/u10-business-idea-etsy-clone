@@ -15,67 +15,72 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1)
     }
-  },
+  }
 }));
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email().required('Required'),
-  password: Yup.string()
-    .required('Password is required')
+  password: Yup.string().required('Password is required')
 });
 
 function Login() {
   const classes = useStyles();
 
   return (
-    <Formik
-      initialValues={{ email: '', password: ''}}
-      validationSchema={ LoginSchema }
-      onSubmit={async(values, { setSubmitting }) => {
-        await api.postLoginForm(values);
-        setSubmitting(false);
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting
-        /* and other goodies */
-      }) => {
-        return (
-          <form onSubmit={handleSubmit} className={classes.root}>
-            <TextField
-              error={!!errors.email && touched.email}
-              helperText={errors.email}
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              variant="outlined"
-              label="Email"
-            />
-            <TextField
-              error={!!errors.password && touched.password}
-              helperText={errors.password}
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              variant="outlined"
-              label="Password"
-            />
+    <>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={LoginSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          await api.postLoginForm(values);
+          setSubmitting(false);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting
+          /* and other goodies */
+        }) => {
+          return (
+            <form onSubmit={handleSubmit} className={classes.root}>
+              <TextField
+                error={!!errors.email && touched.email}
+                helperText={errors.email}
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                variant="outlined"
+                label="Email"
+              />
+              <TextField
+                error={!!errors.password && touched.password}
+                helperText={errors.password}
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                variant="outlined"
+                label="Password"
+              />
 
-            <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">
-              Submit
-            </Button>
-          </form>
-        );
-      }}
-    </Formik>
+              <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">
+                Submit
+              </Button>
+            </form>
+          );
+        }}
+      </Formik>
+
+      <p>
+        If you don't have an account: <a href="/register">register</a>
+      </p>
+    </>
   );
 }
 
