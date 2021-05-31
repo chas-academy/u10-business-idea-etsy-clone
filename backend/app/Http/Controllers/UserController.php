@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function register(Request $request) {
-        $validates = $request->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email', 
             'password' => 'required', 
@@ -27,19 +27,19 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
-        $validates = $request->validate([
+        $request->validate([
             'email' => 'required', 
             'password' => 'required', 
         ]);
 
         $user = User::where('email', request('email'))->first();
 
-        if (Hash::check(request('password'), $user->password)) {
+        if ($user && Hash::check(request('password'), $user->password)) {
             $token = $user->createToken($user->name)->plainTextToken;
             return ['user' => $user, 'token' => $token];
         }
         else {
-            return 'Invalid password';
+            return 'Invalid username or password';
         }
     }
 }
