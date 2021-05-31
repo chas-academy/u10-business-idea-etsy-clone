@@ -39,7 +39,7 @@ export default class api {
       axios
       .post(`${process.env.REACT_APP_URL}/login`, formData, {withCredentials: true})
       .then((response) => {
-        console.log(response)
+        console.log(response.headers)
       })
     .catch(error => error))
     .catch(error => error)
