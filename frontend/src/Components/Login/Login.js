@@ -32,7 +32,7 @@ function Login() {
       initialValues={{ email: '', password: ''}}
       validationSchema={ LoginSchema }
       onSubmit={async(values, { setSubmitting }) => {
-        await api.postLoginForm(values);
+        await api.login(values);
         setSubmitting(false);
       }}
     >
