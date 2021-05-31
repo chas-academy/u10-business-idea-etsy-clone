@@ -3,43 +3,45 @@ import axios from 'axios';
 export default class api {
   static getCategories() {
     return axios
-      .get(`${process.env.REACT_APP_URL}/categories`)
+      .get(`https://u10-backend.herokuapp.com/api/categories`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static getCategory(slug) {
     return axios
-      .get(`${process.env.REACT_APP_URL}/categories/${slug}`)
+      .get(`https://u10-backend.herokuapp.com/api/categories/${slug}`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static getProducts() {
     return axios
-      .get(`${process.env.REACT_APP_URL}/products`)
+      .get(`https://u10-backend.herokuapp.com/api/products`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static postRegisterForm(user) {
     return axios
-      .post(`${process.env.REACT_APP_URL}/register`, user)
+      .post(`https://u10-backend.herokuapp.com/api/register`, user)      //${process.env.REACT_APP_URL}
       .then(response => response.data)
       .catch(error => error);
   }
 
-  static postLoginForm(user) {
+  static login(user) {
+    let formData = new FormData();
+    formData.append('email', 'hej@mail.com');
+    formData.append('password', 'hejhej');
+
     return axios
-      .post(`${process.env.REACT_APP_URL}/login`, user)
+    .get(`https://u10-backend.herokuapp.com/api/sanctum/csrf-cookie`).then(
+      axios
+      .post(`${process.env.REACT_APP_URL}/login`, formData, {withCredentials: true})
       .then((response) => {
-        if (response.data) {
-          localStorage.token = response.data;
-          console.log('Login successful')
-        } else {
-          console.log('Login failed')
-        }
+        console.log(response)
       })
-      .catch(error => error);
+    .catch(error => error))
+    .catch(error => error)
   }
 }
