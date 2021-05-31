@@ -30,16 +30,12 @@ export default class api {
   }
 
   static login(user) {
-    let formData = new FormData();
-    formData.append('email', 'hej@mail.com');
-    formData.append('password', 'hejhej');
-
     return axios
     .get(`https://u10-backend.herokuapp.com/api/sanctum/csrf-cookie`).then(
       axios
-      .post(`${process.env.REACT_APP_URL}/login`, formData, {withCredentials: true})
+      .post(`${process.env.REACT_APP_URL}/login`, user, {withCredentials: true})
       .then((response) => {
-        console.log(response.headers)
+        console.log(response)
       })
     .catch(error => error))
     .catch(error => error)
