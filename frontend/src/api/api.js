@@ -30,7 +30,7 @@ export default class api {
   }
 
   static login(user) {
-    return axios
+   /* return axios
     .get(`https://u10-backend.herokuapp.com/api/sanctum/csrf-cookie`).then(
       axios
       .post(`${process.env.REACT_APP_URL}/login`, user, {withCredentials: true})
@@ -38,6 +38,17 @@ export default class api {
         console.log(response)
       })
     .catch(error => error))
-    .catch(error => error)
+    .catch(error => error)*/
+
+    return fetch(`https://u10-backend.herokuapp.com/api/sanctum/csrf-cookie`, {
+       method: 'GET',
+       credentials: 'include'
+    }).then(
+      axios
+      .post(`${process.env.REACT_APP_URL}/login`, user, {withCredentials: true})
+      .then((response) => {
+        console.log(response)
+      }
+    ))
   }
 }
