@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://u10-frontend.herokuapp.com', 'localhost'],
+    'allowed_origins' => ['https://u10-frontend.herokuapp.com', 'localhost:3001'],
 
     'allowed_origins_patterns' => [],
 
