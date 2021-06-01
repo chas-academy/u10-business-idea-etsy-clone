@@ -20,13 +20,16 @@ export default function App() {
   const [categories, setCategories] = useState(() => []);
 
   useEffect(() => {
-    api.getProducts().then(res => {
-      console.log({ res });
-      if (res) setProducts(res);
+    api.getProducts().then(response => {
+      if (response.status === 200) {
+        setProducts(response.data);
+      }
     });
 
-    api.getCategories().then(res => {
-      if (res) setCategories(res);
+    api.getCategories().then(response => {
+      if (response.status === 200) {
+        setCategories(response.data);
+      }
     });
   }, []);
 
