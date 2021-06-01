@@ -33,9 +33,9 @@ export default class api {
 
   static login(user) {
    return axios
-    .get(`https://u10-backend.herokuapp.com/api/sanctum/csrf-cookie`).then(
+    .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`).then(
       axios
-      .post(`${process.env.REACT_APP_URL}/login`, user, {withCredentials: true})
+      .post(`${process.env.REACT_APP_URL}/login`, user)
       .then((response) => {
         console.log(response)
       })
