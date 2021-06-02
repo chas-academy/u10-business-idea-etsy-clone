@@ -49,7 +49,7 @@ function AddProductForm(props) {
 
   return (
     <Formik
-      initialValues={{ name: '', price: '', stock: '', description: '', image: '', category: '' }}
+      initialValues={{ name: '', price: '', stock: '', description: '', /*image: '',*/ category: '' }}
       validationSchema={AddProductSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
@@ -109,7 +109,7 @@ function AddProductForm(props) {
               label="Description"
               className={classes.descriptionField}
             />
-            <TextField
+            {/* <TextField
               error={!!errors.image && touched.image}
               helperText={errors.image}
               name="image"
@@ -118,7 +118,7 @@ function AddProductForm(props) {
               value={values.image}
               variant="outlined"
               label="Image"
-            />
+            /> */}
 
             <FormControl
               className={classes.formControl}
