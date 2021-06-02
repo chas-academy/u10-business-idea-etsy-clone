@@ -13,19 +13,23 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AddProductForm from './Components/AddProduct/AddProductForm';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import UserProfile from './Components/UserProfile/UserProfile';
 
 export default function App() {
   const [products, setProducts] = useState();
   const [categories, setCategories] = useState(() => []);
 
   useEffect(() => {
-    api.getProducts().then(res => {
-      console.log({ res });
-      if (res) setProducts(res);
+    api.getProducts().then(response => {
+      if (response.status === 200) {
+        setProducts(response.data);
+      }
     });
 
-    api.getCategories().then(res => {
-      if (res) setCategories(res);
+    api.getCategories().then(response => {
+      if (response.status === 200) {
+        setCategories(response.data);
+      }
     });
   }, []);
 
@@ -54,6 +58,7 @@ export default function App() {
             </Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" component={Login}></Route>
+            <Route path="/profile" component={UserProfile}></Route>
           </Switch>
         </Container>
       </Router>
