@@ -19,8 +19,6 @@ class ProductSeeder extends Seeder
         $currencies = ['EUR', 'SEK', 'AUD', 'CAD', 'USD', 'GBP'];       //Filter currencies
 
         foreach ($listings as $product)
-            sleep(3);
-            
             DB::table('products')->insert([
                 'created_at' => now(),
                 'updated_at' => now(),
