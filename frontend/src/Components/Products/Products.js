@@ -1,6 +1,7 @@
 import Product from './Product';
 
 const Products = ({ data }) => {
+  console.log(data);
   return (
     <>
       {data.map((products, index) => (

@@ -20,8 +20,19 @@ export default class api {
   static getProducts() {
     return axios
       .get(`${process.env.REACT_APP_URL}/products`)
-      .then(response => response)
+      .then(response => {
+      console.log(response);
+      return response})
       .catch(error => error);
+  }
+
+  static getUserProducts(userid) {
+    return axios
+    .get(`${process.env.REACT_APP_URL}/store/${userid}`)
+    .then(response => {
+      console.log(response);
+      return response})
+    .catch(error => error);
   }
 
   static postRegisterForm(user) {

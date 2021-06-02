@@ -36,6 +36,7 @@ function Login({callsetuser}) {
         onSubmit={async (values, { setSubmitting }) => {
           await api.login(values).then(response => {
             if (response.status === 200) {
+              console.log(response);
               callsetuser();
               history.push('/profile');
             }

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-import Category from './Components/Category/index';
+import Category from './Components/Category/Category';
 import api from './api/api';
 //import AddProductForm from './Components/AddProduct/AddProductForm';
 import ProductCard from './Components/ProductCard/Card';
@@ -18,12 +18,12 @@ import UserProfile from './Components/UserProfile/UserProfile';
 export default function App() {
   const [products, setProducts] = useState();
   const [categories, setCategories] = useState(() => []);
+  const [userProducts, setUserProducts] = useState();
   const [user, setUser] = useState(null);
 
   function callsetuser() {
     if (localStorage.getItem("user") !== null) {
       setUser(JSON.parse(localStorage.getItem("user")));
-      alert('woooo');
     }
   };
 
@@ -39,7 +39,16 @@ export default function App() {
         setCategories(response.data);
       }
     });
-  }, []);
+
+    if (user !== null) {
+      api.getUserProducts(1).then(response => {
+        if (response.status === 200) {
+          console.log(response.data.products);
+          setUserProducts(response.data.products);
+        }
+      })
+    }
+  }, [user]);
 
   return (
     <React.Fragment>
@@ -66,7 +75,7 @@ export default function App() {
             </Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" render={() => <Login callsetuser={callsetuser} />}></Route>
-            <Route path="/profile" component={UserProfile}></Route>
+            <Route path="/profile" render={() => <UserProfile userProducts={userProducts} />}></Route>
           </Switch>
         </Container>
       </Router>
