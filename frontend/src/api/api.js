@@ -33,9 +33,9 @@ export default class api {
 
   static login(user) {
    return axios
-    .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`).then(
+    .get(`http://api.etzy.shop/sanctum/csrf-cookie`).then(
       axios
-      .post(`${process.env.REACT_APP_URL}/login`, user)
+      .post(`http://api.etzy.shop/login`, user)
       .then((response) => {
         console.log(response)
       })
