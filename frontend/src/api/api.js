@@ -5,37 +5,37 @@ axios.defaults.withCredentials = true;
 export default class api {
   static getCategories() {
     return axios
-      .get(`https://u10-backend.herokuapp.com/api/categories`)
+      .get(`${process.env.REACT_APP_URL}/categories`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static getCategory(slug) {
     return axios
-      .get(`https://u10-backend.herokuapp.com/api/categories/${slug}`)
+      .get(`${process.env.REACT_APP_URL}/categories/${slug}`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static getProducts() {
     return axios
-      .get(`https://u10-backend.herokuapp.com/api/products`)
+      .get(`${process.env.REACT_APP_URL}/products`)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static postRegisterForm(user) {
     return axios
-      .post(`https://u10-backend.herokuapp.com/api/register`, user)      //${process.env.REACT_APP_URL}
+      .post(`${process.env.REACT_APP_URL}/register`, user)
       .then(response => response.data)
       .catch(error => error);
   }
 
   static login(user) {
    return axios
-    .get(`http://api.etzy.shop/sanctum/csrf-cookie`).then(
+    .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`).then(
       axios
-      .post(`http://api.etzy.shop/login`, user)
+      .post(`${process.env.REACT_APP_URL}/login`, user)
       .then((response) => {
         console.log(response)
       })
