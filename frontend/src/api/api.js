@@ -38,7 +38,8 @@ export default class api {
       .post(`${process.env.REACT_APP_URL}/login`, user)
       .then(response => {
         if (response.data) {
-          localStorage.token = response.data;
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
           console.log('Login successful');
           return response;
         } else {

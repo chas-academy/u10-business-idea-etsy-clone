@@ -8,10 +8,12 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Categories from '../Categories/Categories';
 import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header ({user, ...props}) {
   const classes = useStyles();
+    // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage#2010948
 
   return (
+    <>
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Link to={'/'}>
@@ -41,6 +43,8 @@ function Header(props) {
       </Toolbar>
       <Categories categories={props.categories} />
     </AppBar>
+    {user !== null && <div>Welcome, {user.name}! So happy to see you here.</div>}
+    </>
   );
 }
 

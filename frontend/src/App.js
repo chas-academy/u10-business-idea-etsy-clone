@@ -18,6 +18,14 @@ import UserProfile from './Components/UserProfile/UserProfile';
 export default function App() {
   const [products, setProducts] = useState();
   const [categories, setCategories] = useState(() => []);
+  const [user, setUser] = useState(null);
+
+  function callsetuser() {
+    if (localStorage.getItem("user") !== null) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+      alert('woooo');
+    }
+  };
 
   useEffect(() => {
     api.getProducts().then(response => {
@@ -37,7 +45,7 @@ export default function App() {
     <React.Fragment>
       <CssBaseline />
       <Router>
-        <Header categories={categories} />
+        <Header categories={categories} user={user} />
         <Container maxWidth="md" component="main">
           <Switch>
             <Route path="/" exact>
@@ -57,7 +65,7 @@ export default function App() {
               </>
             </Route>
             <Route path="/register" component={Register}></Route>
-            <Route path="/login" component={Login}></Route>
+            <Route path="/login" render={() => <Login callsetuser={callsetuser} />}></Route>
             <Route path="/profile" component={UserProfile}></Route>
           </Switch>
         </Container>
