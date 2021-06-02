@@ -16,8 +16,11 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $listings = $this->fetch('/listings/active/');
+        $currencies = ['EUR', 'SEK', 'AUD', 'CAD', 'USD', 'GBP'];       //Filter currencies
 
         foreach ($listings as $product)
+            sleep(3);
+            
             DB::table('products')->insert([
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -25,7 +28,7 @@ class ProductSeeder extends Seeder
                 'name' => $product['title'],
                 'price' => $product['price'],
                 'stock' => $product['quantity'],
-                'currency' => $product['currency_code'],
+                'currency' => in_array($product['currency_code'], $currencies) ? $product['currency_code'] : 'USD',
                 'description' => $product['description'],
                 'picture' => $this->fetch('/listings/' . $product['listing_id'] . '/images/')[0]['url_570xN'],
                 'categories_id' => rand(1, Category::all()->count()),
