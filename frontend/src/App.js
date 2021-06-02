@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/Header';
@@ -22,14 +22,19 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   function callsetuser() {
-    if (localStorage.getItem("user") !== null) {
-      setUser(JSON.parse(localStorage.getItem("user")));
+    console.log('App component callsetuser - get here');
+    if (localStorage.getItem('user')) {
+      setUser(JSON.parse(localStorage.getItem('user')));
+      console.log('App component callsetuser', user);
     }
-  };
+  }
 
   useEffect(() => {
+    console.log('App Component useEffect() user', user);
+
     api.getProducts().then(response => {
       if (response.status === 200) {
+        console.log('App getProducts()', response.data);
         setProducts(response.data);
       }
     });
@@ -41,12 +46,13 @@ export default function App() {
     });
 
     if (user !== null) {
-      api.getUserProducts(1).then(response => {
+      console.log('App Component getUserProducts', user);
+      api.getUserProducts(user.id).then(response => {
         if (response.status === 200) {
-          console.log(response.data.products);
+          console.log('App Component getUserProducts', response.data.products);
           setUserProducts(response.data.products);
         }
-      })
+      });
     }
   }, [user]);
 
@@ -59,7 +65,7 @@ export default function App() {
           <Switch>
             <Route path="/" exact>
               <>
-                {products ? <Products data={products} /> : <h3>No Products to show</h3>}
+                {products ? <Products products={products} /> : <h3>No Products to show</h3>}
                 <ProductCard></ProductCard>
               </>
             </Route>
@@ -75,7 +81,10 @@ export default function App() {
             </Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" render={() => <Login callsetuser={callsetuser} />}></Route>
-            <Route path="/profile" render={() => <UserProfile userProducts={userProducts} />}></Route>
+            <Route
+              path="/profile"
+              render={() => <UserProfile userProducts={userProducts} />}
+            ></Route>
           </Switch>
         </Container>
       </Router>

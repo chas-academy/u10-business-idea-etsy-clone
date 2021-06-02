@@ -1,4 +1,5 @@
 import axios from 'axios';
+import callsetuser from '../App';
 
 axios.defaults.withCredentials = true;
 
@@ -21,18 +22,20 @@ export default class api {
     return axios
       .get(`${process.env.REACT_APP_URL}/products`)
       .then(response => {
-      console.log(response);
-      return response})
+        console.log('api.getproducts', response);
+        return response;
+      })
       .catch(error => error);
   }
 
   static getUserProducts(userid) {
     return axios
-    .get(`${process.env.REACT_APP_URL}/store/${userid}`)
-    .then(response => {
-      console.log(response);
-      return response})
-    .catch(error => error);
+      .get(`${process.env.REACT_APP_URL}/store/${userid}`)
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .catch(error => error);
   }
 
   static postRegisterForm(user) {
@@ -43,22 +46,24 @@ export default class api {
   }
 
   static login(user) {
-   return axios
-    .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`).then(
-      axios
-      .post(`${process.env.REACT_APP_URL}/login`, user)
-      .then(response => {
-        if (response.data) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('user', JSON.stringify(response.data.user));
-          console.log('Login successful');
-          return response;
-        } else {
-          console.log('Login failed');
-          return response;
-        }
-      })
-    .catch(error => error))
-    .catch(error => error)
+    return axios
+      .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`)
+      .then(
+        axios
+          .post(`${process.env.REACT_APP_URL}/login`, user)
+          .then(response => {
+            if (response.data) {
+              localStorage.setItem('token', response.data.token);
+              localStorage.setItem('user', JSON.stringify(response.data.user));
+              console.log('Login successful');
+              return response;
+            } else {
+              console.log('Login failed');
+              return response;
+            }
+          })
+          .catch(error => error)
+      )
+      .catch(error => error);
   }
 }

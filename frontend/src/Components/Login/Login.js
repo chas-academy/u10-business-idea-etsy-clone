@@ -24,7 +24,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required')
 });
 
-function Login({callsetuser}) {
+function Login({ callsetuser }) {
   let history = useHistory();
   const classes = useStyles();
 
@@ -35,12 +35,13 @@ function Login({callsetuser}) {
         validationSchema={LoginSchema}
         onSubmit={async (values, { setSubmitting }) => {
           await api.login(values).then(response => {
-            if (response.status === 200) {
-              console.log(response);
+            console.log('Login Component form submission', response);
+            if (response.status === 204 || response.status === 200) {
+              console.log('Login component if statement', response);
               callsetuser();
               history.push('/profile');
             }
-          })
+          });
           setSubmitting(false);
         }}
       >
@@ -88,7 +89,7 @@ function Login({callsetuser}) {
       <p>
         If you don't have an account: <a href="/register">register</a>
       </p>
-      </>
+    </>
   );
 }
 

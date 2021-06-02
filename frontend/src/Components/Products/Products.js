@@ -1,11 +1,11 @@
 import Product from './Product';
 
-const Products = ({ data }) => {
-  console.log(data);
+const Products = ({ products }) => {
+  console.log('Products Component', products);
   return (
     <>
-      {data.map((products, index) => (
-        <Product key={index} data={products} />
+      {products.map((product, index) => (
+        <Product key={index} product={product} />
       ))}
     </>
   );
