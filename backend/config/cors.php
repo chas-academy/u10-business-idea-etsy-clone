@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['etzy.shop', 'u10-frontend.herokuapp.com'],
+    'allowed_origins' => ['http://etzy.shop', 'http://u10-frontend.herokuapp.com'],
 
     'allowed_origins_patterns' => [],
 
