@@ -124,7 +124,7 @@ class ProductController extends Controller
         ]);
 
         $converter = new Converter(new ISOCurrencies(), $exchange);
-        $result = $converter->convert(new Money($price, new Currency($from)), new Currency($to));
+        $result = $converter->convert(new Money((int)$price, new Currency($from)), new Currency($to));
         return ['price' => (int)$result->getAmount(), 'currency' => $result->getCurrency()];
     }
 }
