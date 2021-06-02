@@ -20,9 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->float('price')->default(0);
             $table->smallInteger('stock')->unsigned();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('picture')->nullable();
-            $table->tinyInteger('status')->default('1');
         });
     }
 
