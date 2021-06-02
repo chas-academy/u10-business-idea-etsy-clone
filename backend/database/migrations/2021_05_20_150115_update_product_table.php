@@ -15,6 +15,7 @@ class UpdateProductTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('categories_id')->constrained();
+            $table->string('currency')->default('EUR');
         });
     }
 
