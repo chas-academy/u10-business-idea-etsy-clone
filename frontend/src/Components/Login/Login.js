@@ -34,7 +34,7 @@ function Login() {
         initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          await api.postLoginForm(values).then(response => {
+          await api.login(values).then(response => {
             if (response.status === 200) {
               history.push('/profile');
             }
@@ -86,7 +86,7 @@ function Login() {
       <p>
         If you don't have an account: <a href="/register">register</a>
       </p>
-    </>
+      </>
   );
 }
 

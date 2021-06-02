@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
 export default class api {
   static getCategories() {
     return axios
@@ -29,8 +31,10 @@ export default class api {
       .catch(error => error);
   }
 
-  static postLoginForm(user) {
-    return axios
+  static login(user) {
+   return axios
+    .get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`).then(
+      axios
       .post(`${process.env.REACT_APP_URL}/login`, user)
       .then(response => {
         if (response.data) {
@@ -42,6 +46,7 @@ export default class api {
           return response;
         }
       })
-      .catch(error => error);
+    .catch(error => error))
+    .catch(error => error)
   }
 }
