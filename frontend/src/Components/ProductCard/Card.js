@@ -67,8 +67,8 @@ export default function ProductCard({
     setExpanded(!expanded);
   };
 
-  const addToCart = () => {
-    api.addToCart(productId);
+  const addToCart = (userId, productId) => {
+    api.addToCart(userId, productId);
   };
 
   return (
@@ -96,7 +96,10 @@ export default function ProductCard({
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={addToCart}>
+        <IconButton
+          aria-label="add to cart"
+          onClick={() => addToCart(authContext.user.id, productId)}
+        >
           <AddShoppingCartIcon />
         </IconButton>
         <IconButton aria-label="share">

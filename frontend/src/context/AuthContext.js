@@ -28,6 +28,19 @@ export function AuthContextProvider(props) {
     if (result) {
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', JSON.stringify(result.user));
+      api.axios.interceptors.request.use(
+        async config => {
+          console.log('Axios interceptor', config);
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${result.token}`
+          };
+          return config;
+        },
+        error => {
+          Promise.reject(error);
+        }
+      );
       setAuthState({ ...authState, user: result.user, token: result.token, isLoggedIn: true });
     }
   }
