@@ -4,9 +4,8 @@ const Product = ({ product }) => {
   return (
     <>
       <ProductCard
-        name={product.name}
+        name={product.name.substr(0, 50)}
         description={product.description}
-        categorie={product.categorie}
         picture={product.picture}
         price={product.price}
         currency={product.currency}

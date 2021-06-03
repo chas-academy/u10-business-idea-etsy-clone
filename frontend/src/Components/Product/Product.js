@@ -24,6 +24,7 @@ function Product(props) {
       component="img"
       src={product?.picture}
       title={product?.name}
+      alt={product?.name}
     />
     <CardContent>
       <h2>{product?.price} {product?.currency}</h2>
