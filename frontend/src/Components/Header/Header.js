@@ -11,7 +11,6 @@ import Categories from '../Categories/Categories';
 import Mobilecategories from '../Categories/Mobilecategories';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
-import MenuIcon from '@material-ui/icons/Menu';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
@@ -30,18 +29,6 @@ function Header(props) {
     <>
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          {props.mobileView
-            ? <IconButton
-                {...{
-                  edge: "start",
-                  color: "inherit",
-                  "aria-label": "menu",
-                  "aria-haspopup": "true",
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-            : <></>}
           <Link to={'/'}>
             <svg
               className="logo"

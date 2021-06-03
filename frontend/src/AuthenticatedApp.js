@@ -21,13 +21,6 @@ export default function AuthenticatedApp() {
   const [categories, setCategories] = useState(() => []);
   const [userProducts, setUserProducts] = useState();
   const authContext = useAuthContext();
-  // const [mobileView, setMobileView] = useState(false);
-
-  // function setResponsiveness() {
-      // (window.innerWidth < 900 
-        // ? setMobileView(true) 
-        // : setMobileView(false))
-    // };
 
   useEffect(() => {
     console.log('AuthenticatedApp authContext', authContext, authContext.user);
@@ -58,20 +51,11 @@ export default function AuthenticatedApp() {
     });
   }, []);
 
-  // useEffect(() => {
-    // setResponsiveness();
-    // window.addEventListener("resize", () => setResponsiveness());
-// 
-    // return () => {
-      // window.removeEventListener("resize", () => setResponsiveness());
-    // }
-  // }, [])
-
   return (
     <React.Fragment>
       <CssBaseline />
       <Router>
-        <Header categories={categories} user={authContext.user} /* mobileView={mobileView} */ />
+        <Header categories={categories} user={authContext.user} />
         <Container maxWidth="md" component="main">
           <Switch>
             <Route path="/" exact>

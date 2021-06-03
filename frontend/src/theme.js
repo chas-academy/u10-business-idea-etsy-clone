@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
         margin: '10px',
         padding: '5px',
         width: '450px',
+        '@media (max-width: 900px)': {
+          maxWidth: '40vw',
+        }
     },
     toolbar: {
       flexWrap: 'wrap',
