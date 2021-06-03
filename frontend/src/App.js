@@ -22,11 +22,10 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   function callsetuser() {
-    console.log('App component callsetuser - get here');
-    if (localStorage.getItem('user')) {
-      setUser(JSON.parse(localStorage.getItem('user')));
-      console.log('App component callsetuser', user);
-    }
+    setTimeout(() => {
+      let userInfo = JSON.parse(localStorage.getItem('user'));
+      setUser(userInfo);
+    }, 3000);
   }
 
   useEffect(() => {
