@@ -21,6 +21,7 @@ export default function AuthenticatedApp() {
   const [products, setProducts] = useState();
   const [categories, setCategories] = useState(() => []);
   const [userProducts, setUserProducts] = useState();
+  const [order, setOrder] = useState();
   const authContext = useAuthContext();
 
   useEffect(() => {
@@ -35,8 +36,13 @@ export default function AuthenticatedApp() {
           setUserProducts(response.data.products);
         }
       });
-      api.getOrderProducts(authContext.user.id).then(response => {console.log('getOrderProducts' + response)});
       
+      api.getOrderProducts(authContext.user.id).then(response => {
+        if(response.status === 200) {
+          console.log(response.data);
+          setOrder(response.data);  
+        }
+      })
     }
   }, [authContext]);
 
@@ -86,7 +92,7 @@ export default function AuthenticatedApp() {
               path="/profile"
               render={() => (userProducts ? <UserProfile userProducts={userProducts} /> : null)}
             ></Route>
-            <Route path="/orders" component={Orders} products={products} ></Route>
+            <Route path="/orders" render={() => <Orders products={order} />} ></Route>
           </Switch>
         </Container>
       </Router>
