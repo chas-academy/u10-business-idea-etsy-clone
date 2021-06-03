@@ -18,13 +18,11 @@ export default class api {
       .catch(error => error);
   }
 
-  static getProducts() {
+  static getProducts(category = null) {
+    let query = (category) ? `/products/${category}` : '/products';
     return axios
-      .get(`${process.env.REACT_APP_URL}/products`)
-      .then(response => {
-        console.log('api.getproducts', response);
-        return response;
-      })
+      .get(`${process.env.REACT_APP_URL}${query}`)
+      .then(response => response)
       .catch(error => error);
   }
 
@@ -32,7 +30,6 @@ export default class api {
     return axios
       .get(`${process.env.REACT_APP_URL}/store/${userid}`)
       .then(response => {
-        console.log(response);
         return response;
       })
       .catch(error => error);
