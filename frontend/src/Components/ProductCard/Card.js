@@ -19,6 +19,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { useAuthContext } from '../../context/AuthContext';
+import api from '../../api/api';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,7 +56,8 @@ export default function ProductCard({
   price,
   currency,
   stock,
-  userId
+  userId,
+  productId
 }) {
   const classes = useStyles();
   const authContext = useAuthContext();
@@ -65,13 +67,17 @@ export default function ProductCard({
     setExpanded(!expanded);
   };
 
+  const addToCart = () => {
+    api.addToCart(productId);
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
         className={classes.title}
         avatar={
           <Avatar aria-label="product" className={classes.avatar}>
-            R
+            {productId}
           </Avatar>
         }
         action={
@@ -90,7 +96,7 @@ export default function ProductCard({
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={addToCart}>
           <AddShoppingCartIcon />
         </IconButton>
         <IconButton aria-label="share">

@@ -19,7 +19,7 @@ export default class api {
   }
 
   static getProducts(category = null) {
-    let query = (category) ? `/products/${category}` : '/products';
+    let query = category ? `/products/${category}` : '/products';
     return axios
       .get(`${process.env.REACT_APP_URL}${query}`)
       .then(response => response)
@@ -38,8 +38,20 @@ export default class api {
   static postRegisterForm(user) {
     return axios
       .post(`${process.env.REACT_APP_URL}/register`, user)
-      .then(response => response)
+      .then(response => {
+        axios.post(`${process.env.REACT_APP_URL}/orders/`, response.data.user.id);
+        return response;
+      })
       .catch(error => error);
+  }
+
+  static addToCart(user) {
+    console.log('Add To Cart' + user);
+    return;
+    //axios
+    //   .post(`${process.env.REACT_APP_URL}/`, user)
+    //   .then(response => response)
+    //   .catch(error => error);
   }
 
   static async login(user) {
