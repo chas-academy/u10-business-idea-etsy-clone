@@ -57,4 +57,11 @@ export default class api {
       return false;
     }
   }
+
+  static logout() {
+    return axios
+      .post(`${process.env.REACT_APP_URL}/logout`)
+      .then(response => response)
+      .catch(error => error);
+  }
 }

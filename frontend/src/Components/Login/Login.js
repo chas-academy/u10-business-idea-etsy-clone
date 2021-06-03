@@ -75,6 +75,7 @@ function Login() {
                 value={values.password}
                 variant="outlined"
                 label="Password"
+                type="password"
               />
 
               <Button type="submit" disabled={isSubmitting} variant="contained" color="primary">

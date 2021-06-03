@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Link} from "react-router-dom";
+import { useAuthContext } from '../../context/AuthContext';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-export default function Mobilecategories ({categories}) {
+export default function Mobilecategories ({categories, handleLogout}) {
     const [open, setOpen] = useState(false);
+    const authContext = useAuthContext();
 
     const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -18,7 +24,7 @@ export default function Mobilecategories ({categories}) {
   };
     return (
       <div>
-        <Button onClick={toggleDrawer(true)}>Categories</Button>
+        <IconButton onClick={toggleDrawer(true)}><MenuIcon /></IconButton>
         <Drawer anchor='left' open={open} onClose={toggleDrawer(false)}>
           <div onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
@@ -30,6 +36,22 @@ export default function Mobilecategories ({categories}) {
                 </Link>
               ))}
             </List>
+            {authContext.isLoggedIn && <>
+              <Divider />
+              <Link to={'/orders'}>
+                    <IconButton color="primary">
+                      <ShoppingCartIcon /> Cart
+                    </IconButton>
+                  </Link>
+                <br />
+                  <IconButton
+                    onClick={handleLogout}
+                    color="primary"
+                    variant="contained"
+                  >
+                    <ExitToAppIcon />Log Out
+                  </IconButton>
+            </>}
           </div>
         </Drawer>
       </div>
