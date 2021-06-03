@@ -39,11 +39,12 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::get('/orders', [OrderController::class, 'index']);
-    Route::get('/orders/{id}', [OrderController::class, 'show']);
+    Route::get('/orders/{id}/products', [OrderController::class, 'show']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
     Route::post('/order/{orderId}/product/{productId}', [OrderController::class, 'buy']);
     Route::delete('/order/{orderId}/product/{productId}', [OrderController::class, 'remove']);
 
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
 });

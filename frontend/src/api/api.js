@@ -71,6 +71,15 @@ export default class api {
     console.log('Add To Cart data', orderProduct);
   }
 
+  static async getOrderProducts(userId) {
+    return await this.axios
+      .get(`${process.env.REACT_APP_URL}/orders/${userId}/products`)
+      .then(response => {
+        return response;
+      })
+      .catch(error => error);
+  }
+
   static async login(user) {
     await axios.get(`${process.env.REACT_APP_URL}/sanctum/csrf-cookie`);
     const response = await axios.post(`${process.env.REACT_APP_URL}/login`, user);
