@@ -8,14 +8,18 @@ import { useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Categories from '../Categories/Categories';
+import Mobilecategories from '../Categories/Mobilecategories';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
+import MenuIcon from '@material-ui/icons/Menu';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 function Header(props) {
   let history = useHistory();
   const authContext = useAuthContext();
   const classes = useStyles();
-  // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage#2010948
+  const mobileView = useMediaQuery('(max-width:900px)');
 
   const handleLogout = () => {
     authContext.logout();
@@ -26,6 +30,18 @@ function Header(props) {
     <>
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
+          {props.mobileView
+            ? <IconButton
+                {...{
+                  edge: "start",
+                  color: "inherit",
+                  "aria-label": "menu",
+                  "aria-haspopup": "true",
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            : <></>}
           <Link to={'/'}>
             <svg
               className="logo"
@@ -64,7 +80,9 @@ function Header(props) {
             )}
           </nav>
         </Toolbar>
-        <Categories categories={props.categories} />
+        {mobileView
+        ? <Mobilecategories categories={props.categories} />
+        : <Categories categories={props.categories} />}
       </AppBar>
       {authContext.user != null ? (
         <div>Welcome, {authContext.user.name}! So happy to see you here.</div>
