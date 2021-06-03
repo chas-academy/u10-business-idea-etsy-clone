@@ -42,4 +42,13 @@ class UserController extends Controller
             return 'Invalid username or password';
         }
     }
+
+    public function logout(Request $request) {
+        auth()->user()->tokens()->delete();
+
+        $response = [
+            'message' => 'User logged out'
+        ];
+        return response($response, 200);
+    }
 }

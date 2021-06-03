@@ -11,7 +11,7 @@ class OrderController extends Controller
     //CRUD for orders
     public function index() //get all products
     {
-        $response = auth()->users()->orders()->get();
+        $response = auth()->user()->orders()->get();
         return response($response, 200);
     }
 
@@ -38,5 +38,10 @@ class OrderController extends Controller
     public function buy($orderId, $productId)
     {
         return Order::find($orderId)->products()->attach($productId);
+    }
+
+    public function remove($orderId, $productId)
+    {
+        return Order::find($orderId)->products()->detach($productId);
     }
 }
