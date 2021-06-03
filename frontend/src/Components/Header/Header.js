@@ -4,17 +4,22 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import useStyles from '../../theme';
+import { useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Categories from '../Categories/Categories';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
-function Header({ user, ...props }) {
+function Header(props) {
+  let history = useHistory();
+  const authContext = useAuthContext();
   const classes = useStyles();
   // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage#2010948
 
   const handleLogout = () => {
     localStorage.clear();
+    history.push('/');
   };
 
   return (
@@ -41,17 +46,26 @@ function Header({ user, ...props }) {
             <IconButton href="#" color="primary">
               <ShoppingCartIcon />
             </IconButton>
-            <IconButton href="/login" color="primary">
-              <AccountCircle />
-            </IconButton>
-            <Button type="submit" variant="contained" color="primary" onClick={handleLogout}>
-              Log out
-            </Button>
+
+            <Link to={'/login'}>
+              <IconButton color="primary">
+                <AccountCircle />
+              </IconButton>
+            </Link>
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleLogout}
+            ></Button>
           </nav>
         </Toolbar>
         <Categories categories={props.categories} />
       </AppBar>
-      {user !== null && <div>Welcome, {user.name}! So happy to see you here.</div>}
+      {authContext.user != null ? (
+        <div>Welcome, {authContext.user.id}! So happy to see you here.</div>
+      ) : null}
     </>
   );
 }

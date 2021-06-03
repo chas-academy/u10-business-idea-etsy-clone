@@ -1,11 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import api from '../../api/api';
+import { useAuthContext } from '../../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,9 +24,10 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required')
 });
 
-function Login({ callsetuser }) {
-  let history = useHistory();
+function Login() {
   const classes = useStyles();
+  const history = useHistory();
+  const authContext = useAuthContext();
 
   return (
     <>
@@ -34,14 +35,12 @@ function Login({ callsetuser }) {
         initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          await api.login(values).then(response => {
-            console.log('Login Component form submission', response);
-            if (response.status === 204 || response.status === 200) {
-              console.log('Login component if statement', response);
-              callsetuser();
-              history.push('/profile');
-            }
-          });
+          try {
+            await authContext.login(values);
+            history.push('/profile');
+          } catch (error) {
+            console.log('Error while logging in', error);
+          }
           setSubmitting(false);
         }}
       >

@@ -1,7 +1,6 @@
 import ProductCard from '../ProductCard/Card';
 
 const Product = ({ product }) => {
-  console.log('this is the product', product);
   return (
     <>
       <ProductCard
