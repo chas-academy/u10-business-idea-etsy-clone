@@ -2,7 +2,6 @@
 import Products from '../Products/Products';
 
 const UserProfile = ({ userProducts }) => {
-  console.log('User proofile component', userProducts);
   return (
     <>
       <>

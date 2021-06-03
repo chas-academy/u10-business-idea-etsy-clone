@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Category from './Components/Category/Category';
 import api from './api/api';
-//import AddProductForm from './Components/AddProduct/AddProductForm';
-import ProductCard from './Components/ProductCard/Card';
 import Product from './Components/Product/Product';
 import Products from './Components/Products/Products';
 import Orders from './Components/Orders/Orders';
@@ -26,24 +24,18 @@ export default function AuthenticatedApp() {
   const authContext = useAuthContext();
 
   useEffect(() => {
-    console.log('AuthenticatedApp authContext', authContext, authContext.user);
     if (authContext.user !== null) {
-      console.log('App Component getUserProducts', authContext.user);
-
       api.getUserProducts(authContext.user.id).then(response => {
-        console.log('App Component getUserProduct resoibse', response);
         if (response.status === 200) {
-          console.log('App Component getUserProducts', response.data.products);
           setUserProducts(response.data.products);
         }
       });
-      
+
       api.getOrderProducts(authContext.user.id).then(response => {
-        if(response.status === 200) {
-          console.log(response.data);
-          setOrder(response.data);  
+        if (response.status === 200) {
+          setOrder(response.data);
         }
-      })
+      });
     }
   }, [authContext]);
 
@@ -94,7 +86,7 @@ export default function AuthenticatedApp() {
               path="/profile"
               render={() => (userProducts ? <UserProfile userProducts={userProducts} /> : null)}
             ></Route>
-            <Route path="/orders" render={() => <Orders products={order} />} ></Route>
+            <Route path="/orders" render={() => <Orders products={order} />}></Route>
           </Switch>
         </Container>
       </Router>

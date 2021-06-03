@@ -1,5 +1,4 @@
 import axios from 'axios';
-import callsetuser from '../App';
 
 axios.defaults.withCredentials = true;
 
@@ -54,21 +53,18 @@ export default class api {
   }
 
   static async addToCart(userId, productId) {
-    console.log(`Add To Cart userId  ${userId} ${productId}`);
     let orderId = localStorage.getItem('orderId');
-    console.log('Api Component AddtoCart', orderId);
+
     if (orderId === null) {
       const { data: order } = await this.axios.post(`${process.env.REACT_APP_URL}/orders`, {
         user_id: userId
       });
       orderId = order.id;
-      console.log('Add To Cart data', order);
     }
     const { data: orderProduct } = await this.axios.post(
       `${process.env.REACT_APP_URL}/order/${orderId}/product/${productId}`,
       {}
     );
-    console.log('Add To Cart data', orderProduct);
   }
 
   static async getOrderProducts(userId) {
@@ -89,7 +85,7 @@ export default class api {
       response.data !== 'Invalid username or password' &&
       (response.status === 204 || response.status === 200)
     ) {
-      console.log('Login successful', response);
+      console.log('Login successful');
       return { token: response.data.token, user: response.data.user };
     } else {
       return false;
