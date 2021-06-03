@@ -1,12 +1,12 @@
 import ProductCard from '../ProductCard/Card';
 
-const Product = ({ data }) => {
+const Product = ({ product }) => {
   return (
     <>
       <ProductCard
-        name={data.name}
-        description={data.description}
-        categorie={data.categorie}
+        name={product.name}
+        description={product.description}
+        categorie={product.categorie}
       ></ProductCard>
     </>
   );
