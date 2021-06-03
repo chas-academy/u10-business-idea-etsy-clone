@@ -18,6 +18,13 @@ export default class api {
       .catch(error => error);
   }
 
+  static getProduct(id) {
+    return axios
+      .get(`${process.env.REACT_APP_URL}/product/${id}`)
+      .then(response => response)
+      .catch(error => error);
+  }
+
   static getProducts(category = null) {
     let query = (category) ? `/products/${category}` : '/products';
     return axios
