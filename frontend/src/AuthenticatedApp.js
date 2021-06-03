@@ -61,8 +61,11 @@ export default function AuthenticatedApp() {
           <Switch>
             <Route path="/" exact>
               <>
-                {products ? <Products products={products} /> : <h3>No Products to show</h3>}
-                <ProductCard></ProductCard>
+                {products ? (
+                  <Products products={products} addToCart={api.addToCart} />
+                ) : (
+                  <h3>No Products to show</h3>
+                )}
               </>
             </Route>
             <Route path="/c/:slug" component={Category} />

@@ -12,6 +12,7 @@ const Product = ({ product }) => {
         currency={product.currency}
         stock={product.stock}
         userId={product.user_id}
+        productId={product.id}
       ></ProductCard>
     </>
   );
