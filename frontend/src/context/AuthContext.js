@@ -26,11 +26,14 @@ export function AuthContextProvider(props) {
     console.log('AuthContext Login', result);
 
     if (result) {
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
       setAuthState({ ...authState, user: result.user, token: result.token, isLoggedIn: true });
     }
   }
 
   async function logout() {
+    localStorage.clear();
     setAuthState(initAuthState);
   }
 

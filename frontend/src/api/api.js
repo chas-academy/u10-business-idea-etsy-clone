@@ -54,8 +54,6 @@ export default class api {
       response.data !== 'Invalid username or password' &&
       (response.status === 204 || response.status === 200)
     ) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
       console.log('Login successful', response);
       return { token: response.data.token, user: response.data.user };
     } else {

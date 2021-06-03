@@ -18,7 +18,6 @@ function Header(props) {
   // https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage#2010948
 
   const handleLogout = () => {
-    localStorage.clear();
     authContext.logout();
     history.push('/');
   };
