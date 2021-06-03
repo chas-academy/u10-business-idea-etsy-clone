@@ -35,6 +35,8 @@ export default function AuthenticatedApp() {
           setUserProducts(response.data.products);
         }
       });
+      api.getOrderProducts(authContext.user.id).then(response => {console.log('getOrderProducts' + response)});
+      
     }
   }, [authContext]);
 
@@ -84,7 +86,7 @@ export default function AuthenticatedApp() {
               path="/profile"
               render={() => (userProducts ? <UserProfile userProducts={userProducts} /> : null)}
             ></Route>
-            <Route path="/orders" component={Orders}></Route>
+            <Route path="/orders" component={Orders} products={products} ></Route>
           </Switch>
         </Container>
       </Router>

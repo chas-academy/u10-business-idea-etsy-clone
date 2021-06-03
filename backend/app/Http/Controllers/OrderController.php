@@ -15,9 +15,9 @@ class OrderController extends Controller
         return response($response, 200);
     }
 
-    public function show($id) //get all products
+    public function show($userId) //get all products
     {
-        $order = Order::findOrFail($id);
+        $order = Order::where('user_id', $userId)->first();
         if ($order) {
             return $products = $order->products()->get();
         }
