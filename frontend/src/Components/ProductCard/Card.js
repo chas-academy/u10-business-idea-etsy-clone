@@ -7,19 +7,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { useAuthContext } from '../../context/AuthContext';
 import api from '../../api/api';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,8 +42,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500]
   },
   title: {
-    height: 100,
-    overflowY: 'auto'
+    height: 110
+  },
+  image: {
+    height: 150
   }
 }));
 
@@ -73,38 +73,39 @@ export default function ProductCard({
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        className={classes.title}
-        avatar={
-          <Avatar aria-label="product" className={classes.avatar}>
-            {productId}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={name}
-        // subheader={categorie}
-      />
-      <CardMedia className={classes.media} image={picture} title="Paella dish" />
+      <Link to={'/product/' + productId}>
+        <CardHeader className={classes.title} title={name} />
+        <CardMedia
+          component="img"
+          src={picture}
+          title={name}
+          alt={name}
+          className={classes.image}
+        />
+      </Link>
       <CardContent>
-        <Typography color="textSecondary" component="p">
+        <Typography color="textSecondary" component="h2">
           {price} {currency}
         </Typography>
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to cart"
-          onClick={() => addToCart(authContext.user.id, productId)}
-        >
-          <AddShoppingCartIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {authContext.user != null ? (
+          <IconButton
+            aria-label="add to cart"
+            onClick={() => addToCart(authContext.user.id, productId)}
+          >
+            <AddShoppingCartIcon />
+          </IconButton>
+        ) : (
+          <Link to={'/login'}>
+            <AddShoppingCartIcon />
+          </Link>
+        )}
+
+        {authContext.user != null && authContext.user.id === userId ? (
+          <Button className={classes.button} startIcon={<DeleteIcon color="secondary" />}></Button>
+        ) : null}
 
         <Typography color="textSecondary" component="p">
           Stock: {stock}
@@ -117,26 +118,8 @@ export default function ProductCard({
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+        ></IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>More info:</Typography>
-          <Typography paragraph>{description}</Typography>
-          {authContext.user != null && authContext.user.id === userId ? (
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              startIcon={<DeleteIcon />}
-            >
-              Remove
-            </Button>
-          ) : null}
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

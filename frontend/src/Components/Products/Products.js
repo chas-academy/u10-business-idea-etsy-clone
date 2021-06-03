@@ -3,10 +3,10 @@ import Grid from '@material-ui/core/Grid';
 
 const Products = ({ products }) => {
   return (
-    <Grid container spacing={1} direction="row" justify="center" alignItems="center">
+    <Grid container spacing={3} direction="row" justify="center" alignItems="center">
       {products.map((product, index) => (
-        <Grid key={index} container item lg={3} md={6} sm={12}>
-          <Product product={product} />
+        <Grid container item lg={4} md={6} sm={12} key={index}>
+          <Product key={index} product={product} />
         </Grid>
       ))}
     </Grid>

@@ -7,6 +7,7 @@ import Category from './Components/Category/Category';
 import api from './api/api';
 //import AddProductForm from './Components/AddProduct/AddProductForm';
 import ProductCard from './Components/ProductCard/Card';
+import Product from './Components/Product/Product';
 import Products from './Components/Products/Products';
 import Orders from './Components/Orders/Orders';
 import './App.scss';
@@ -86,6 +87,7 @@ export default function AuthenticatedApp() {
                 )}
               </>
             </Route>
+            <Route path="/product/:id" component={Product} />
             <Route path="/register" component={Register}></Route>
             <Route path="/login" render={() => <Login />}></Route>
             <Route
