@@ -15,6 +15,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import { useAuthContext } from '../../context/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,8 +43,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ProductCard({ name, description, categorie }) {
+export default function ProductCard({
+  name,
+  description,
+  picture,
+  price,
+  currency,
+  stock,
+  userId
+}) {
   const classes = useStyles();
+  const authContext = useAuthContext();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -61,25 +74,27 @@ export default function ProductCard({ name, description, categorie }) {
           </IconButton>
         }
         title={name}
-        subheader={categorie}
+        // subheader={categorie}
       />
-      <CardMedia
-        className={classes.media}
-        image="../../assets/images/ring.jpg"
-        title="Paella dish"
-      />
+      <CardMedia className={classes.media} image={picture} title="Paella dish" />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Text description 2
+        <Typography color="textSecondary" component="p">
+          {price} {currency}
         </Typography>
       </CardContent>
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <AddShoppingCartIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+
+        <Typography color="textSecondary" component="p">
+          Stock: {stock}
+        </Typography>
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -95,6 +110,16 @@ export default function ProductCard({ name, description, categorie }) {
         <CardContent>
           <Typography paragraph>More info:</Typography>
           <Typography paragraph>{description}</Typography>
+          {authContext.user != null && authContext.user.id === userId ? (
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              startIcon={<DeleteIcon />}
+            >
+              Remove
+            </Button>
+          ) : null}
         </CardContent>
       </Collapse>
     </Card>
