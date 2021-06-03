@@ -7,6 +7,11 @@ const Product = ({ product }) => {
         name={product.name}
         description={product.description}
         categorie={product.categorie}
+        picture={product.picture}
+        price={product.price}
+        currency={product.currency}
+        stock={product.stock}
+        userId={product.user_id}
       ></ProductCard>
     </>
   );
