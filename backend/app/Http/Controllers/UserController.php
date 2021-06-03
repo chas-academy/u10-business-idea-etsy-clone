@@ -14,7 +14,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email', 
             'password' => 'required', 
-            'password_confirm' => 'required',
+            // 'password_confirm' => 'required',
         ]);
     
         $user = User::create([
