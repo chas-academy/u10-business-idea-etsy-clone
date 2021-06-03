@@ -55,12 +55,12 @@ export default class api {
   static async addToCart(userId, productId) {
     let orderId = localStorage.getItem('orderId');
 
-    if (orderId === null) {
-      const { data: order } = await this.axios.post(`${process.env.REACT_APP_URL}/orders`, {
-        user_id: userId
-      });
-      orderId = order.id;
-    }
+    // if (orderId === null) {
+    //   const { data: order } = await this.axios.post(`${process.env.REACT_APP_URL}/orders`, {
+    //     user_id: userId
+    //   });
+    //   orderId = order.id;
+    // }
     const { data: orderProduct } = await this.axios.post(
       `${process.env.REACT_APP_URL}/order/${orderId}/product/${productId}`,
       {}
