@@ -3,3 +3,9 @@ const Orders = () => {
 };
 
 export default Orders;
+
+// todo:
+// add logic in api
+// add logic in state in app.js
+// display what we get from api in component
+// crud?
