@@ -43,18 +43,20 @@ function Header(props) {
             inputProps={{ 'aria-label': 'search' }}
           />
           <nav>
-            <Link to={'/'}>
-              <IconButton color="primary">
-                <ShoppingCartIcon />
-              </IconButton>
-            </Link>
             {authContext.isLoggedIn ? (
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={handleLogout}
-              ></Button>
+              <>
+                <Link to={'/orders'}>
+                  <IconButton color="primary">
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Link>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleLogout}
+                ></Button>
+              </>
             ) : (
               <Link to={'/login'}>
                 <IconButton color="primary">
