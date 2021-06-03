@@ -67,7 +67,7 @@ function Header(props) {
         <Categories categories={props.categories} />
       </AppBar>
       {authContext.user != null ? (
-        <div>Welcome, {authContext.user.id}! So happy to see you here.</div>
+        <div>Welcome, {authContext.user.name}! So happy to see you here.</div>
       ) : null}
     </>
   );
