@@ -19,6 +19,7 @@ function Header(props) {
 
   const handleLogout = () => {
     localStorage.clear();
+    authContext.logout();
     history.push('/');
   };
 
@@ -43,22 +44,25 @@ function Header(props) {
             inputProps={{ 'aria-label': 'search' }}
           />
           <nav>
-            <IconButton href="#" color="primary">
-              <ShoppingCartIcon />
-            </IconButton>
-
-            <Link to={'/login'}>
+            <Link to={'/'}>
               <IconButton color="primary">
-                <AccountCircle />
+                <ShoppingCartIcon />
               </IconButton>
             </Link>
-
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={handleLogout}
-            ></Button>
+            {authContext.isLoggedIn ? (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={handleLogout}
+              ></Button>
+            ) : (
+              <Link to={'/login'}>
+                <IconButton color="primary">
+                  <AccountCircle />
+                </IconButton>
+              </Link>
+            )}
           </nav>
         </Toolbar>
         <Categories categories={props.categories} />
