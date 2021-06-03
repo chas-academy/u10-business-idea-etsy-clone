@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     //CRUD for orders
     public function index() //get all products
     {
-        return Order::all();
+        $response = auth()->user()->orders()->get();
+        return response($response, 200);
     }
 
     public function show($id) //get all products
@@ -36,5 +38,10 @@ class OrderController extends Controller
     public function buy($orderId, $productId)
     {
         return Order::find($orderId)->products()->attach($productId);
+    }
+
+    public function remove($orderId, $productId)
+    {
+        return Order::find($orderId)->products()->detach($productId);
     }
 }

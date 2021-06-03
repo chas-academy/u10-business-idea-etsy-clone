@@ -8,6 +8,7 @@ import api from './api/api';
 //import AddProductForm from './Components/AddProduct/AddProductForm';
 import ProductCard from './Components/ProductCard/Card';
 import Products from './Components/Products/Products';
+import Orders from './Components/Orders/Orders';
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AddProductForm from './Components/AddProduct/AddProductForm';
@@ -80,6 +81,7 @@ export default function AuthenticatedApp() {
               path="/profile"
               render={() => (userProducts ? <UserProfile userProducts={userProducts} /> : null)}
             ></Route>
+            <Route path="/orders" component={Orders}></Route>
           </Switch>
         </Container>
       </Router>
