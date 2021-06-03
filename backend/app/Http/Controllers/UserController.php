@@ -39,7 +39,7 @@ class UserController extends Controller
             return ['user' => $user, 'token' => $token];
         }
         else {
-            return 'Invalid username or password';
+            return response('Invalid username or password', 403);
         }
     }
 
