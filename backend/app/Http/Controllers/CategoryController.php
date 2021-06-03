@@ -18,7 +18,7 @@ class CategoryController extends Controller
     }
 
     public function getCategory($slug) {
-        return [Category::where('slug', $slug)->get()[0]->title];
+        return Category::where('slug', $slug)->get()[0]->title;
     }
    
 }
