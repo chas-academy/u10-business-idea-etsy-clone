@@ -6,7 +6,8 @@ function Category(props) {
 
   useEffect(() => {
       api.getCategory(props.match.params.slug).then((res) => {
-        setCategory(res);
+        setCategory(res.data);
+        console.log(res);
       });
   }, [props.match.params.slug]);
 
