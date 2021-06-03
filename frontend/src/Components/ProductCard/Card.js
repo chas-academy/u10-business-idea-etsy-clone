@@ -22,7 +22,8 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345
+    width: 300,
+    height: 400
   },
   media: {
     height: 0,
@@ -40,6 +41,10 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  title: {
+    height: 100,
+    overflow: 'scroll'
   }
 }));
 
@@ -63,6 +68,7 @@ export default function ProductCard({
   return (
     <Card className={classes.root}>
       <CardHeader
+        className={classes.title}
         avatar={
           <Avatar aria-label="product" className={classes.avatar}>
             R
