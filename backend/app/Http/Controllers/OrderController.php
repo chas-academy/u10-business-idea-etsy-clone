@@ -17,8 +17,10 @@ class OrderController extends Controller
 
     public function show($id) //get all products
     {
-
-        return Order::findOrFail($id);
+        $order = Order::findOrFail($id);
+        if ($order) {
+            return $products = $order->products()->get();
+        }
     }
 
     public function store(Request $request) // create orders

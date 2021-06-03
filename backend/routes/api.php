@@ -46,4 +46,5 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::delete('/order/{orderId}/product/{productId}', [OrderController::class, 'remove']);
 
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
 });
