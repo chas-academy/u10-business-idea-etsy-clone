@@ -1,14 +1,14 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import useStyles from '../../theme';
 import { useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Categories from '../Categories/Categories';
-import Mobilecategories from '../Categories/Mobilecategories';
+import Mobilemenu from '../Categories/Mobilemenu';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -29,6 +29,7 @@ function Header(props) {
     <>
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
+          {mobileView && <Mobilemenu handleLogout={handleLogout} categories={props.categories} />}
           <Link to={'/'}>
             <svg
               className="logo"
@@ -46,35 +47,36 @@ function Header(props) {
             inputProps={{ 'aria-label': 'search' }}
           />
           <nav>
-            {authContext.isLoggedIn ? (
+            {authContext.isLoggedIn && !mobileView ? (
               <>
                 <Link to={'/orders'}>
                   <IconButton color="primary">
                     <ShoppingCartIcon />
                   </IconButton>
                 </Link>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
+                
+                <IconButton
                   onClick={handleLogout}
-                ></Button>
+                  color="primary"
+                  variant="contained"
+                >
+                  <ExitToAppIcon />
+                </IconButton>
               </>
             ) : (
-              <Link to={'/login'}>
+              <></>
+            )}
+            <Link to={authContext.isLoggedIn ? '/profile' : '/login'} >
                 <IconButton color="primary">
                   <AccountCircle />
                 </IconButton>
-              </Link>
-            )}
+            </Link>
           </nav>
         </Toolbar>
-        {mobileView
-        ? <Mobilecategories categories={props.categories} />
-        : <Categories categories={props.categories} />}
+        {!mobileView && <Categories categories={props.categories} />}
       </AppBar>
       {authContext.user != null ? (
-        <div>Welcome, {authContext.user.name}! So happy to see you here.</div>
+        <div className={classes.welcomemsg} >Welcome, {authContext.user.name}! So happy to see you here.</div>
       ) : null}
     </>
   );

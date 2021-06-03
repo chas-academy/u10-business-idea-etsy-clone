@@ -32,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
       borderBottom: `1px solid ${theme.palette.divider}`,
       alignItems: 'center',
+      
+    },
+    toolbar: {
+      '@media (max-width: 500px)': {
+          padding: 0,
+        }
+    },
+    welcomemsg: {
+      padding: '3px',
+      textAlign: 'center',
+      backgroundColor: '#D1ACAE'
     },
     search: {
         background: `${etzy.palette.primary.light}`,
@@ -39,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '5px',
         width: '450px',
         '@media (max-width: 900px)': {
-          maxWidth: '40vw',
+          maxWidth: '30vw',
         }
     },
     toolbar: {

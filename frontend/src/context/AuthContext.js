@@ -34,6 +34,8 @@ export function AuthContextProvider(props) {
 
   async function logout() {
     localStorage.clear();
+    const result = await api.logout();
+    console.log(result)
     setAuthState(initAuthState);
   }
 

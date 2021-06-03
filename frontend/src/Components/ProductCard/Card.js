@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     height: 100,
-    overflow: 'scroll'
+    overflowY: 'auto'
   }
 }));
 
