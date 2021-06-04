@@ -10,6 +10,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Categories from '../Categories/Categories';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
+import Frontpage from '../FrontPage/Frontpage';
+
 
 function Header(props) {
   let history = useHistory();
@@ -69,6 +71,9 @@ function Header(props) {
       {authContext.user != null ? (
         <div>Welcome, {authContext.user.name}! So happy to see you here.</div>
       ) : null}
+       <div> 
+         < Frontpage /> 
+       </div>
     </>
   );
 }
