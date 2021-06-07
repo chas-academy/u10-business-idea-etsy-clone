@@ -17,11 +17,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { useAuthContext } from '../../context/AuthContext';
 import api from '../../api/api';
+import {
+  Link,
+} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: 300,
-    height: 400
+    height: auto
   },
   media: {
     height: 0,
@@ -71,7 +74,7 @@ export default function ProductCard({
   return (
     <Card className={classes.root}>
       <CardHeader
-        title={name}
+        title={<Link to={'/product/' + product.id}>{name}</Link>}
       />
       <CardMedia
       component="img"
