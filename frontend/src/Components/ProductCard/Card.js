@@ -6,24 +6,15 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import ShareIcon from '@material-ui/icons/Share';
-
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { useAuthContext } from '../../context/AuthContext';
 import api from '../../api/api';
-<<<<<<< HEAD
-import {
-  Link,
-} from "react-router-dom";
-=======
 import { Link } from 'react-router-dom';
->>>>>>> d8198604565d8ef11c9662733826143a6b2325df
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +48,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ProductCard({
   name,
-  description,
   picture,
   price,
   currency,
@@ -79,17 +69,6 @@ export default function ProductCard({
 
   return (
     <Card className={classes.root}>
-<<<<<<< HEAD
-      <CardHeader
-        title={<Link to={'/product/' + product.id}>{name}</Link>}
-      />
-      <CardMedia
-      component="img"
-      src={picture}
-      title={name}
-      alt={name}
-    />
-=======
       <Link to={'/product/' + productId}>
         <CardHeader className={classes.title} title={name} />
         <CardMedia
@@ -97,10 +76,8 @@ export default function ProductCard({
           src={picture}
           title={name}
           alt={name}
-          className={classes.image}
         />
       </Link>
->>>>>>> d8198604565d8ef11c9662733826143a6b2325df
       <CardContent>
         <Typography color="textSecondary" component="h2">
           {price} {currency}
