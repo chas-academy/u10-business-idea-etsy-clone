@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -35,9 +36,14 @@ class OrderController extends Controller
         return Order::destroy($id);
     }
 
-    public function buy($orderId, $productId)
+    public function buy($productId)
     {
-        return Order::find($orderId)->products()->attach($productId);
+        $orderId = Order::where('user_id', Auth::id())->get('id')[0]['id'];
+        $orderProduct = new OrderProduct;
+        $orderProduct->order_id = $orderId;
+        $orderProduct->product_id = $productId;
+        $orderProduct->save();
+        return $orderProduct;
     }
 
     public function remove($orderId, $productId)
