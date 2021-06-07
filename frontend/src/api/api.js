@@ -53,22 +53,13 @@ export default class api {
       .catch(error => error);
   }
 
-  static async addToCart(userId, productId) {
-    console.log(`Add To Cart userId  ${userId} ${productId}`);
-    let orderId = localStorage.getItem('orderId');
-    console.log('Api Component AddtoCart', orderId);
-    if (orderId === null) {
-      const { data: order } = await this.axios.post(`${process.env.REACT_APP_URL}/orders`, {
-        user_id: userId
-      });
-      orderId = order.id;
-      console.log('Add To Cart data', order);
-    }
+  static async addToCart(productId) {
     const { data: orderProduct } = await this.axios.post(
-      `${process.env.REACT_APP_URL}/order/${orderId}/product/${productId}`,
+      `${process.env.REACT_APP_URL}/order/${productId}`,
       {}
     );
     console.log('Add To Cart data', orderProduct);
+    return orderProduct;
   }
 
   static async login(user) {
