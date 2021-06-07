@@ -11,15 +11,19 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { useAuthContext } from '../../context/AuthContext';
 import api from '../../api/api';
+<<<<<<< HEAD
 import {
   Link,
 } from "react-router-dom";
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> d8198604565d8ef11c9662733826143a6b2325df
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,8 +48,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500]
   },
   title: {
-    height: 100,
-    overflowY: 'auto'
+    height: 110
+  },
+  image: {
+    height: 150
   }
 }));
 
@@ -73,6 +79,7 @@ export default function ProductCard({
 
   return (
     <Card className={classes.root}>
+<<<<<<< HEAD
       <CardHeader
         title={<Link to={'/product/' + product.id}>{name}</Link>}
       />
@@ -82,6 +89,18 @@ export default function ProductCard({
       title={name}
       alt={name}
     />
+=======
+      <Link to={'/product/' + productId}>
+        <CardHeader className={classes.title} title={name} />
+        <CardMedia
+          component="img"
+          src={picture}
+          title={name}
+          alt={name}
+          className={classes.image}
+        />
+      </Link>
+>>>>>>> d8198604565d8ef11c9662733826143a6b2325df
       <CardContent>
         <Typography color="textSecondary" component="h2">
           {price} {currency}
@@ -89,15 +108,22 @@ export default function ProductCard({
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to cart"
-          onClick={() => addToCart(authContext.user.id, productId)}
-        >
-          <AddShoppingCartIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {authContext.user != null ? (
+          <IconButton
+            aria-label="add to cart"
+            onClick={() => addToCart(authContext.user.id, productId)}
+          >
+            <AddShoppingCartIcon />
+          </IconButton>
+        ) : (
+          <Link to={'/login'}>
+            <AddShoppingCartIcon />
+          </Link>
+        )}
+
+        {authContext.user != null && authContext.user.id === userId ? (
+          <Button className={classes.button} startIcon={<DeleteIcon color="secondary" />}></Button>
+        ) : null}
 
         <Typography color="textSecondary" component="p">
           Stock: {stock}
@@ -110,26 +136,8 @@ export default function ProductCard({
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+        ></IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>More info:</Typography>
-          <Typography paragraph>{description}</Typography>
-          {authContext.user != null && authContext.user.id === userId ? (
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              startIcon={<DeleteIcon />}
-            >
-              Remove
-            </Button>
-          ) : null}
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }
