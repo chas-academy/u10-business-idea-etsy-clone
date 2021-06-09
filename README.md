@@ -97,6 +97,16 @@ Read more here:
 
 https://tecadmin.net/install-nvm-macos-with-homebrew/
 
+# Links
+
+etzy.shop
+api.etzy.shop
+
+# Miscellaneous
+
+Designs/wireframes:
+https://www.figma.com/file/exDY4Qi9jtbPHDEBbsuJ5F/U10-Business-idea-Etzy?node-id=0%3A1
+
 # Contributors
 
 | Name               | GitHub account   |
