@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\User;
 
 class ProductSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class ProductSeeder extends Seeder
             DB::table('products')->insert([
                 'created_at' => now(),
                 'updated_at' => now(),
-                'user_id' => 1,
+                'user_id' => rand(2, User::all()->count()),
                 'name' => $product['title'],
                 'price' => $product['price'],
                 'stock' => $product['quantity'],
