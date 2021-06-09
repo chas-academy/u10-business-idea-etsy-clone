@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserFactory extends Factory
 {
@@ -14,6 +15,13 @@ class UserFactory extends Factory
      * @var string
      */
     protected $model = User::class;
+
+    /**
+     * Available currencies.
+     *
+     * @var array
+     */
+    protected $currencies = ['EUR', 'SEK', 'AUD', 'CAD', 'USD', 'GBP'];
 
     /**
      * Define the model's default state.
@@ -26,8 +34,8 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            // 'api_token' => Str::random(60),
+            'password' => Hash::make('password'),
+            'currency' => $this->currencies[rand(0, count($this->currencies) - 1)],
         ];
     }
 
