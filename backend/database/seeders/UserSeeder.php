@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -21,13 +22,12 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('adminadmin'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        DB::table('users')->insert([
-            'name' => 'user',
-            'email' => 'user@user.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('useruser'),
-        ]);
+        User::factory()
+            ->count(50)
+            ->create();
     }
 }
