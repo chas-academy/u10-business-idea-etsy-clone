@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
@@ -19,8 +20,15 @@ class ProductController extends Controller
 
     public function index(Request $request) //get all products or from specific category or user
     { 
-        $userCurrency = 'SEK';      //To be fetched from db or as a get param
         $products = null;
+        $userCurrency = null;
+
+        if (auth()->user()) {
+            $userCurrency = auth()->user()->currency;
+        }
+        else {
+            $userCurrency = 'SEK'; 
+        }
 
         if ($request->route('category')) {
             $catId = Category::where('slug', $request->route('category'))->get();
@@ -57,8 +65,15 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $userCurrency = 'SEK';          //To be fetched from db or as a get param
+        $userCurrency = null;
         $product = Product::findOrFail($id);
+
+        if (auth()->user()) {
+            $userCurrency = auth()->user()->currency;
+        }
+        else {
+            $userCurrency = 'SEK'; 
+        }
         
        if ($product->currency !== $userCurrency) {
         $convertCurrency = $this->convertCurrency($product->price, $product->currency, $userCurrency);
