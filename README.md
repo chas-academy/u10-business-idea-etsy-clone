@@ -107,6 +107,9 @@ api.etzy.shop
 Designs/wireframes:
 https://www.figma.com/file/exDY4Qi9jtbPHDEBbsuJ5F/U10-Business-idea-Etzy?node-id=0%3A1
 
+Budget:
+https://docs.google.com/spreadsheets/d/1xcpLYoXEmOnaILr3TZwoXgUExX2oTEi1/edit#gid=1291522197
+
 # Contributors
 
 | Name               | GitHub account   |
