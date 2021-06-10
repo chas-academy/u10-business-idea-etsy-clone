@@ -37,13 +37,15 @@ export default function AuthenticatedApp() {
           setUserProducts(response.data.products);
         }
       });
-      
+
       api.getOrderProducts(authContext.user.id).then(response => {
-        if(response.status === 200) {
+        if (response.status === 200) {
           console.log(response.data);
-          setOrder(response.data);  
+          if (response.data != order) {
+            setOrder(response.data);
+          }
         }
-      })
+      });
     }
   }, [authContext]);
 
@@ -94,7 +96,7 @@ export default function AuthenticatedApp() {
               path="/profile"
               render={() => (userProducts ? <UserProfile userProducts={userProducts} /> : null)}
             ></Route>
-            <Route path="/orders" render={() => <Orders products={order} />} ></Route>
+            <Route path="/orders" render={() => <Orders products={order} />}></Route>
           </Switch>
         </Container>
       </Router>

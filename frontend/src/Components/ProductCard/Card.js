@@ -64,6 +64,8 @@ export default function ProductCard({
   };
 
   const addToCart = (userId, productId) => {
+    console.log(userId);
+    console.log(productId);
     api.addToCart(userId, productId);
   };
 
@@ -86,10 +88,7 @@ export default function ProductCard({
 
       <CardActions disableSpacing>
         {authContext.user != null ? (
-          <IconButton
-            aria-label="add to cart"
-            onClick={() => addToCart(authContext.user.id, productId)}
-          >
+          <IconButton aria-label="add to cart" onClick={() => addToCart(productId)}>
             <AddShoppingCartIcon />
           </IconButton>
         ) : (
