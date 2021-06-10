@@ -47,26 +47,20 @@ export default class api {
     return axios
       .post(`${process.env.REACT_APP_URL}/register`, user)
       .then(response => {
-        axios.post(`${process.env.REACT_APP_URL}/orders/`, response.data.user.id);
+        //axios.post(`${process.env.REACT_APP_URL}/orders/`, response.data.user.id);
         return response;
       })
       .catch(error => error);
   }
 
-  static async addToCart(userId, productId) {
-    console.log(`Add To Cart userId  ${userId} ${productId}`);
-    let orderId = localStorage.getItem('orderId');
-    console.log('Api Component AddtoCart', orderId);
-    if (orderId === null) {
-      const { data: order } = await this.axios.post(`${process.env.REACT_APP_URL}/orders`, {
-        user_id: userId
-      });
-      orderId = order.id;
-      console.log('Add To Cart data', order);
-    }
+  static async addToCart(productId) {
     const { data: orderProduct } = await this.axios.post(
-      `${process.env.REACT_APP_URL}/order/${orderId}/product/${productId}`,
-      {}
+      `${process.env.REACT_APP_URL}/order/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem.token}`
+        }
+      }
     );
     console.log('Add To Cart data', orderProduct);
   }
@@ -75,6 +69,7 @@ export default class api {
     return await this.axios
       .get(`${process.env.REACT_APP_URL}/orders/${userId}/products`)
       .then(response => {
+        console.log('cart ' + response);
         return response;
       })
       .catch(error => error);

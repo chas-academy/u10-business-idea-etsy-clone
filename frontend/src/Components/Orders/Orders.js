@@ -1,7 +1,8 @@
-import Product from '../Products/Product'
+import Product from '../Products/Product';
 import Grid from '@material-ui/core/Grid';
 
-const Orders = ({products}) => {
+const Orders = ({ products }) => {
+  console.log('orders: ');
   console.log(products);
   return (
     <>

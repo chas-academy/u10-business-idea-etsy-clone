@@ -34,7 +34,6 @@ function Register() {
       initialValues={{ name: '', email: '', password: '' }}
       validationSchema={RegisterSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        console.log(setSubmitting, values);
         await api.postRegisterForm(values).then(response => {
           if (!response.error) {
             console.log('this is the right answer');
