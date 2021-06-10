@@ -6,11 +6,9 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -21,7 +19,7 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 300,
-    height: 400
+    height: "auto"
   },
   media: {
     height: 0,
@@ -50,7 +48,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ProductCard({
   name,
-  description,
   picture,
   price,
   currency,
@@ -81,7 +78,6 @@ export default function ProductCard({
           src={picture}
           title={name}
           alt={name}
-          className={classes.image}
         />
       </Link>
       <CardContent>

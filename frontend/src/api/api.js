@@ -61,8 +61,10 @@ export default class api {
           Authorization: `Bearer ${localStorage.getItem.token}`
         }
       }
+
     );
     console.log('Add To Cart data', orderProduct);
+    return orderProduct;
   }
 
   static async getOrderProducts(userId) {

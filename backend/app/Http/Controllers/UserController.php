@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,6 +24,11 @@ class UserController extends Controller
             'email' => request('email'),
         ]);
 
+        //Add order list for user
+        $order = new Order;
+        $order->user_id = $user->id;
+        $order->save();
+    
         return ['user' => $user];
     }
 
