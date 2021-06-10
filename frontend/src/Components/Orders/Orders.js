@@ -1,8 +1,9 @@
 import Product from '../Products/Product';
 import Grid from '@material-ui/core/Grid';
+import AuthenticatedApp from '../../AuthenticatedApp';
 
 const Orders = ({ products }) => {
-  console.log('orders: ');
+  AuthenticatedApp();
   console.log(products);
   return (
     <>
@@ -19,9 +20,3 @@ const Orders = ({ products }) => {
 };
 
 export default Orders;
-
-// todo:
-// add logic in api
-// add logic in state in app.js
-// display what we get from api in component
-// crud?
