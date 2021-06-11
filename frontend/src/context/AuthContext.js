@@ -12,8 +12,16 @@ export const AuthContext = React.createContext({
 
 export function AuthContextProvider(props) {
   const initAuthState = {
+    user: localStorage?.user ? JSON.parse(localStorage.user) : null,
+    token: localStorage.token,
+    isLoggedIn: localStorage.token ? true : false,
+    login,
+    logout
+  };
+
+  const emptyState = {
     user: null,
-    token: null,
+    token: undefined,
     isLoggedIn: false,
     login,
     logout
@@ -48,8 +56,8 @@ export function AuthContextProvider(props) {
   async function logout() {
     localStorage.clear();
     const result = await api.logout();
-    console.log(result)
-    setAuthState(initAuthState);
+    console.log(result);
+    setAuthState(emptyState);
   }
 
   return <AuthContext.Provider value={authState}>{props.children}</AuthContext.Provider>;
