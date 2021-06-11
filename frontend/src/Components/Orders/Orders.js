@@ -4,7 +4,7 @@ import AuthenticatedApp from '../../AuthenticatedApp';
 
 const Orders = ({ products }) => {
   AuthenticatedApp();
-  console.log(products);
+
   return (
     <>
       <h1>This is the products in your order</h1>

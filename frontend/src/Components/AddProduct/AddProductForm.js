@@ -49,11 +49,16 @@ function AddProductForm(props) {
 
   return (
     <Formik
-      initialValues={{ name: '', price: '', stock: '', description: '', /*image: '',*/ category: '' }}
+      initialValues={{
+        name: '',
+        price: '',
+        stock: '',
+        description: '',
+        /*image: '',*/ category: ''
+      }}
       validationSchema={AddProductSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
       }}
     >
       {({

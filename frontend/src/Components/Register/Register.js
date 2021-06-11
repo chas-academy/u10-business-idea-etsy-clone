@@ -36,7 +36,6 @@ function Register() {
       onSubmit={async (values, { setSubmitting }) => {
         await api.postRegisterForm(values).then(response => {
           if (!response.error) {
-            console.log('this is the right answer');
             history.push('/login');
           }
         });

@@ -31,14 +31,12 @@ export function AuthContextProvider(props) {
 
   async function login(credentials) {
     const result = await api.login(credentials);
-    console.log('AuthContext Login', result);
 
     if (result) {
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', JSON.stringify(result.user));
       api.axios.interceptors.request.use(
         async config => {
-          console.log('Axios interceptor', config);
           config.headers = {
             ...config.headers,
             Authorization: `Bearer ${result.token}`
@@ -56,7 +54,7 @@ export function AuthContextProvider(props) {
   async function logout() {
     localStorage.clear();
     const result = await api.logout();
-    console.log(result);
+
     setAuthState(emptyState);
   }
 

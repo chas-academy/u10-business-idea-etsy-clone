@@ -61,9 +61,8 @@ export default class api {
           Authorization: `Bearer ${localStorage.getItem.token}`
         }
       }
-
     );
-    console.log('Add To Cart data', orderProduct);
+
     return orderProduct;
   }
 
@@ -71,7 +70,6 @@ export default class api {
     return await this.axios
       .get(`${process.env.REACT_APP_URL}/orders/${userId}/products`)
       .then(response => {
-        console.log('cart ' + response);
         return response;
       })
       .catch(error => error);
@@ -86,7 +84,6 @@ export default class api {
       response.data !== 'Invalid username or password' &&
       (response.status === 204 || response.status === 200)
     ) {
-      console.log('Login successful', response);
       return { token: response.data.token, user: response.data.user };
     } else {
       return false;

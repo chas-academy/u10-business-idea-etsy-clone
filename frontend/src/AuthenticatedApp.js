@@ -40,7 +40,6 @@ export default function AuthenticatedApp() {
 
       api.getOrderProducts(authContext.user.id).then(response => {
         if (response.status === 200) {
-          console.log(response.data);
           if (response.data != order) {
             setOrder(response.data);
           }
@@ -76,7 +75,6 @@ export default function AuthenticatedApp() {
                   <Products
                     products={products}
                     addToCart={item => {
-                      console.log('name', item);
                       setOrder(prevState => {
                         return [...prevState, item];
                       });

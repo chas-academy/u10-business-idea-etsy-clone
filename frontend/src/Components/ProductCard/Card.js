@@ -67,7 +67,7 @@ export default function ProductCard({
   const addToCart = (userId, productId) => {
     atc({ name: name, picture: picture, price: price });
   };
-  console.log(authContext.user);
+
   return (
     <Card className={classes.root}>
       <Link to={'/product/' + productId}>
