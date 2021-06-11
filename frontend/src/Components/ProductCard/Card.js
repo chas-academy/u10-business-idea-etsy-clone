@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 300,
-    height: "auto"
+    height: 'auto'
   },
   media: {
     height: 0,
@@ -53,7 +53,8 @@ export default function ProductCard({
   currency,
   stock,
   userId,
-  productId
+  productId,
+  atc
 }) {
   const classes = useStyles();
   const authContext = useAuthContext();
@@ -64,21 +65,14 @@ export default function ProductCard({
   };
 
   const addToCart = (userId, productId) => {
-    console.log(userId);
-    console.log(productId);
-    api.addToCart(userId, productId);
+    atc({ name: name, picture: picture, price: price });
   };
-
+  console.log(authContext.user);
   return (
     <Card className={classes.root}>
       <Link to={'/product/' + productId}>
         <CardHeader className={classes.title} title={name} />
-        <CardMedia
-          component="img"
-          src={picture}
-          title={name}
-          alt={name}
-        />
+        <CardMedia component="img" src={picture} title={name} alt={name} />
       </Link>
       <CardContent>
         <Typography color="textSecondary" component="h2">

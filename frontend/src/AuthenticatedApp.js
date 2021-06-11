@@ -22,7 +22,7 @@ export default function AuthenticatedApp() {
   const [products, setProducts] = useState();
   const [categories, setCategories] = useState(() => []);
   const [userProducts, setUserProducts] = useState();
-  const [order, setOrder] = useState();
+  const [order, setOrder] = useState([]);
   const authContext = useAuthContext();
 
   useEffect(() => {
@@ -73,7 +73,15 @@ export default function AuthenticatedApp() {
             <Route path="/" exact>
               <>
                 {products ? (
-                  <Products products={products} addToCart={api.addToCart} />
+                  <Products
+                    products={products}
+                    addToCart={item => {
+                      console.log('name', item);
+                      setOrder(prevState => {
+                        return [...prevState, item];
+                      });
+                    }}
+                  />
                 ) : (
                   <h3>No Products to show</h3>
                 )}

@@ -1,6 +1,6 @@
 import ProductCard from '../ProductCard/Card';
 
-const Product = ({ product }) => {
+const Product = ({ product, addToCart }) => {
   return (
     <>
       <ProductCard
@@ -12,6 +12,7 @@ const Product = ({ product }) => {
         stock={product.stock}
         userId={product.user_id}
         productId={product.id}
+        atc={addToCart}
       ></ProductCard>
     </>
   );
